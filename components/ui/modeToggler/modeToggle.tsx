@@ -36,7 +36,7 @@ export default function DarkModeToggle() {
 			className='rounded-full border p-1'>
 			<img
 				src={
-					!isDarkMode
+					isDarkMode
 						? "/modes_images/light.svg"
 						: "/modes_images/dark.svg"
 				}
