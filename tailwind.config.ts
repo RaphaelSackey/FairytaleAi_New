@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
-	darkMode: ["class"],
+	darkMode: ["selector"],
 	content: [
 		"./pages/**/*.{js,ts,jsx,tsx,mdx}",
 		"./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,7 +13,7 @@ export default {
 				suseLight: ["suse light", "serif"],
 				suseMedium: ["suse medium", "serif"],
 			},
-			
+
 			colors: {
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
