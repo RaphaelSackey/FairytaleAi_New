@@ -4,8 +4,8 @@ import DarkModeToggle from "../modeToggler/modeToggle";
 export default function Navbar() {
 
 	return (
-		<div className='h-16 container mx-auto sticky top-0'>
-			<div className='floating_nav h-full mx-[10%] rounded-full items-center flex justify-between border'>
+		<div className='h-16 container mx-auto sticky top-3 mb-14 z-50'>
+			<div className='floating_nav h-full mx-[10%] rounded-full items-center flex justify-between border bg-white dark:bg-background'>
 				<div className="nav_left_wrapper flex items-center gap-3">
 					<Image
 						src='/sitelogos/logo.png'
