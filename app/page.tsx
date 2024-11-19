@@ -1,5 +1,5 @@
 import LargeSectionImgR from "../components/ui/sections/largeSectionIR";
-import Footer from "@/components/ui/footer/footer";
+import Timeline from "@/components/ui/sections/timeline";
 
 export default function Home() {
 	return (
@@ -9,16 +9,7 @@ export default function Home() {
 				title='Fairytale AI'
 				body='Your AI Powered Storyboard Generator'
 			/>
-			<LargeSectionImgR
-				img='/images/test/1.webp'
-				title='Fairytale AI'
-				body='Your AI Powered Storyboard Generator'
-			/>
-			<LargeSectionImgR
-				img='/images/test/1.webp'
-				title='Fairytale AI'
-				body='Your AI Powered Storyboard Generator'
-			/>
+			<Timeline />
 		</div>
 	);
 }
