@@ -13,7 +13,7 @@ export default function Navbar() {
 					<Image
 						src='/sitelogos/logo.png'
 						width={70}
-						height={50}
+						height={70}
 						alt='site logo'
 					/>
 					<Link href={"/"} className= {`dark:hover:text-neutral-300 hover:text-neutral-500 ${pathname == '/'? 'underline': ''}`}>Home</Link>
@@ -21,7 +21,7 @@ export default function Navbar() {
 				</div>
 
                 <div className="nav_right_wrapper gap-3 flex mx-3">
-                    <Link href='/signInOut' className="rounded-full border px-4 transition ease-in-out hover:border-2 flex justify-center items-center">login</Link>
+                    <Link href='/signInOut' className="rounded-full border px-3 transition ease-in-out hover:border-2 flex justify-center items-center">sign up</Link>
                     <Link href='/createStory' className="rounded-full border  px-3 bg-gradient-to-r from-callToAction transition ease-in-out hover:bg-callToAction duration-500 flex justify-center items-center">Create Story</Link>
                     <DarkModeToggle />
                 </div>

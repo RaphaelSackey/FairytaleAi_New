@@ -20,6 +20,7 @@ export default {
 
 			colors: {
 				callToAction: "#F731DD",
+				varCallToAction: '#484E6A',
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 				card: {

@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import { ThemeProvider } from "../contexts/theme-provider";
 import "./globals.css";
 import Navbar from "../components/ui/navbar/navbar";
-import Footer from "../components/ui/footer/footer";
 
 const suse = localFont({
 	src: "./fonts/SUSE-Regular.ttf",
@@ -32,7 +31,6 @@ export default function RootLayout({
 					
 					<Navbar />
 					{children}
-					<Footer />
 				
 				</ThemeProvider>
 			</body>

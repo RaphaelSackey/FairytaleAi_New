@@ -38,6 +38,7 @@ export default function LargeSectionImgR({
 					src={img}
 					alt='img'
 					fill={true}
+					sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
 					className='rounded-xl'
 				/>
 			</div>
