@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import CreateAccount, {CreateAccountTypes} from "../../services/createAccount";
+import { Axios, AxiosResponse} from "axios";
 
 type formDataType = {
 	firstName: string;
 	lastName: string;
 	email: string;
 	password: string;
-	confirmPassword: string;
+	confirmPassword?: string;
 };
 
 export default function signInOut() {
@@ -51,10 +53,20 @@ export default function signInOut() {
 		}));
 	}
 
-	function handleSignUp(event: React.FormEvent<HTMLFormElement>) {
+	async function handleSignUp(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		if (verifyPassword()) {
-			console.log(formData);
+			const data: CreateAccountTypes = {
+				firstName: formData.firstName,
+				lastName: formData.lastName,
+				email: formData.email,
+				password: formData.password
+			};
+
+			const response:AxiosResponse = await CreateAccount(data)
+			console.log(response.data)
+		
+		
 		} else {
 			alert("Passwords do not match");
 		}
