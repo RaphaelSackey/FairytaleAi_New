@@ -1,4 +1,4 @@
-import axiosInstance from "../utils/axiosInstance"
+import axiosInstance from "./utils/axiosInstance"
 import { AxiosInstance, AxiosResponse} from "axios";
 
 export type CreateAccountTypes = {
