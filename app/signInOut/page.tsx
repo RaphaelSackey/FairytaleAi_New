@@ -7,6 +7,7 @@ import CreateAccount, {
 import { Axios, AxiosResponse } from "axios";
 import { redirect } from "next/navigation";
 import Spinner from "../../components/ui/spinner/spinner";
+import signIn from "@/client_services/clientSignIn";
 
 type formDataType = {
 	firstName: string;
@@ -99,9 +100,20 @@ export default function signInOut() {
 		return false;
 	}
 
-	function handleSigIn(event: React.FormEvent<HTMLFormElement>) {
-		event.preventDefault();
-		console.log(formData);
+	async function handleSigIn(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault()
+		changeLoader()
+		const response = await signIn(formData)
+
+		if (response.data.message === 'success'){
+			redirect("/");
+		}else if (response.data.message === 'incorrect password'){
+			alert('Wrong Password')
+		}else{
+			alert('An account with this email does not exist')
+		}
+		
+		changeLoader()
 	}
 
 	return (

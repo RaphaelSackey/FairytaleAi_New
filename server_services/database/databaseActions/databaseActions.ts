@@ -1,6 +1,6 @@
 import db from "../setup";
 import { dataType } from "./types";
-import { hashPassword } from "@/server_services/hashPassword/encript";
+import { hashPassword } from "@/lib/hashPassword/encript";
 import { addDoc, collection, getDocs, where, query } from "firebase/firestore";
 
 export async function addUser(data: dataType) {
@@ -25,3 +25,20 @@ export async function addUser(data: dataType) {
 		}
 	}
 }
+
+
+export async function getUser(data: dataType){
+	
+	const usersColReference = collection(db, "Users");
+	const q = query(usersColReference, where("email", "==", data.email));
+
+	const info = await getDocs(q)
+	
+	if (!info.empty){
+		return info.docs[0].data() 
+	}else{
+		return null
+	}
+	
+}
+

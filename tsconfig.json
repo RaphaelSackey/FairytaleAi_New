@@ -27,7 +27,7 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"server_services/database/databaseActions/actions.ts",
+		"server_services/database/databaseActions/databaseActions.ts",
 		"server_services/database/setup.ts"
 	],
 	"exclude": ["node_modules"]
