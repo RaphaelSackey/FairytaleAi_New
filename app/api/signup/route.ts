@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { addUser } from "../../../server_services/database/databaseActions/databaseActions";
-import { createSession, decrypt } from "@/lib/sessions/session";
+import {
+	createSession,
+	decrypt,
+} from "@/server_services/utils/sessions/session";
 import { cookies } from "next/headers";
 
 type responseType = {

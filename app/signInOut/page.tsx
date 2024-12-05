@@ -8,6 +8,7 @@ import { Axios, AxiosResponse } from "axios";
 import { redirect } from "next/navigation";
 import Spinner from "../../components/ui/spinner/spinner";
 import signIn from "@/client_services/clientSignIn";
+import { ErrorAlert } from "@/components/ui/alert/errorAlert";
 
 type formDataType = {
 	firstName: string;
@@ -21,7 +22,17 @@ type responseMessageType = {
 	message: string;
 };
 
+type alertType = {
+	state: boolean;
+	message: string;
+};
+
 export default function signInOut() {
+	const [showAlert, setShowAlert] = useState<alertType>({
+		state: false,
+		message: "",
+	});
+
 	const [formState, setFormState] = useState<"sign up" | "sign in">(
 		"sign up"
 	);
@@ -35,6 +46,16 @@ export default function signInOut() {
 	});
 
 	const [loader, setLoader] = useState<boolean>(false);
+
+	function toggleShowAlert(message: string) {
+		console.log('called')
+		setShowAlert((prev) => ({ state: !prev.state, message: message }));
+
+		setTimeout(() => {
+			setShowAlert({ state: false, message: '' });
+		}, 4000); 
+
+	}
 
 	function changeLoader() {
 		setLoader((prev) => !prev);
@@ -81,14 +102,17 @@ export default function signInOut() {
 
 			const response = await CreateAccount(data);
 			if (response.data.message === "success") {
-				redirect("/");
+				redirect("/createStory");
 			} else if (response.data.message === "user already exists") {
-				alert("An account already exists with this email");
+				toggleShowAlert("An account already exists with this email");
+				// alert("An account already exists with this email");
 			} else {
-				alert("something went wrong please try again");
+				toggleShowAlert("something went wrong please try again")
+				// alert("something went wrong please try again");
 			}
 		} else {
-			alert("Passwords do not match");
+			toggleShowAlert("Passwords do not match")
+			// alert("Passwords do not match");
 		}
 		changeLoader();
 	}
@@ -101,23 +125,32 @@ export default function signInOut() {
 	}
 
 	async function handleSigIn(event: React.FormEvent<HTMLFormElement>) {
-		event.preventDefault()
-		changeLoader()
-		const response = await signIn(formData)
+		event.preventDefault();
+		changeLoader();
+		const response = await signIn(formData);
 
-		if (response.data.message === 'success'){
-			redirect("/");
-		}else if (response.data.message === 'incorrect password'){
-			alert('Wrong Password')
-		}else{
-			alert('An account with this email does not exist')
+		if (response.data.message === "success") {
+			redirect("/createStory");
+		} else if (response.data.message === "incorrect password") {
+			toggleShowAlert("Wrong Password");
+			// alert("Wrong Password");
+		} else {
+			toggleShowAlert("An account with this email does not exist")
+			// alert("An account with this email does not exist");
 		}
-		
-		changeLoader()
+
+		changeLoader();
 	}
 
 	return (
 		<div>
+			{showAlert.state && (
+				<div className='container flex items-center justify-center mx-auto mb-5'>
+					{" "}
+					<ErrorAlert message={showAlert.message} />
+				</div>
+			)}
+
 			{formState === "sign up" ? (
 				<form
 					onSubmit={handleSignUp}
@@ -197,7 +230,7 @@ export default function signInOut() {
 						<button
 							type='submit'
 							className='bg-varCallToAction h-11 rounded mt-3 hover:opacity-80'>
-							{loader? <Spinner /> : 'Sign Up'}
+							{loader ? <Spinner /> : "Sign Up"}
 						</button>
 
 						<div className='flex items-center justify-center'>
@@ -245,7 +278,7 @@ export default function signInOut() {
 						<button
 							type='submit'
 							className='bg-varCallToAction h-11 rounded mt-3 hover:opacity-80'>
-							{loader? <Spinner /> : 'Sign In'}
+							{loader ? <Spinner /> : "Sign In"}
 						</button>
 						<div className='flex items-center justify-center'>
 							Don't have an account?{" "}
