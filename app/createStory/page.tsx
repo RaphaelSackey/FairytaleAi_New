@@ -4,9 +4,11 @@ import checkSignIn from "@/client_services/utils/checkSignIn";
 import { ErrorAlert } from "@/components/ui/alert/errorAlert";
 import AddStoryCard from "@/components/ui/addStory/addStoryCard";
 import StoryCard from "@/components/ui/storyCard/storyCard.jsx"
+import StoryForm from "@/components/ui/sotryForm/storyForm";
 
 export default function CreatStory() {
 	const [loggedIn, setLoggedIn] = useState<boolean>(false);
+	const [showStoryForm, setShowStoryForm] = useState(false)
 
 	// check if user is already logged in
 	useLayoutEffect(() => {
@@ -18,8 +20,14 @@ export default function CreatStory() {
 		run();
 	});
 
+	function handleShowStoryForm(){
+		setShowStoryForm(prev => !prev)
+	}
+
 	return (
+		
 		<div>
+			{showStoryForm && <StoryForm showStoryForm={handleShowStoryForm}/>}
 			<div className='container mx-auto gap-5 flex flex-col'>
 				<section className='top flex flex-col gap-4 mb-10'>
 					<div className='font-suseMedium text-4xl'>
@@ -42,7 +50,7 @@ export default function CreatStory() {
                         <StoryCard />
                         <StoryCard />
 						
-						<AddStoryCard />
+						<AddStoryCard showStoryForm={handleShowStoryForm}/>
 					</div>
 				</section>
 			</div>
