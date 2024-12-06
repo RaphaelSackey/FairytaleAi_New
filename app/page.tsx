@@ -1,9 +1,23 @@
+'use client'
+
+import { useLayoutEffect } from "react";
 import LargeSectionImgR from "../components/ui/sections/largeSectionIR";
 import Timeline from "../components/ui/sections/timeline";
 import { Video } from "../components/ui/video/video";
 import Footer from "@/components/ui/footer/footer";
+import checkSignIn from "@/client_services/utils/checkSignIn";
 
 export default function Home() {
+
+	// check if user is already logged in 
+	useLayoutEffect(() => {
+		async function run(){
+			const alreadySignedIn = await checkSignIn()
+			console.log(alreadySignedIn )
+		}
+		run()		
+	})
+	
 	const entries = [
 		{
 			title: "Write a prompt",
