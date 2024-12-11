@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from "../contexts/theme-provider";
 import "./globals.css";
+import { LoggedInContextProvider } from "@/contexts/loggedInStatusContext";
+
 import Navbar from "../components/ui/navbar/navbar";
 
 const suse = localFont({
@@ -23,16 +25,16 @@ export default function RootLayout({
 			lang='en'
 			suppressHydrationWarning>
 			<body className={`${suse} antialiased mt-12 relative`}>
-				<ThemeProvider
-					attribute='class'
-					defaultTheme='system'
-					enableSystem
-					disableTransitionOnChange>
-					
-					<Navbar />
-					{children}
-				
-				</ThemeProvider>
+				<LoggedInContextProvider>
+					<ThemeProvider
+						attribute='class'
+						defaultTheme='system'
+						enableSystem
+						disableTransitionOnChange>
+						<Navbar />
+						{children}
+					</ThemeProvider>
+				</LoggedInContextProvider>
 			</body>
 		</html>
 	);

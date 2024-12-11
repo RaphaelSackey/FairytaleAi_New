@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import generateStoryboard from "@/client_services/generateStoryboard";
 
 
 type storyPromptType = {
@@ -33,6 +34,11 @@ export default function StoryForm({showStoryForm}: {showStoryForm:() => void}) {
             [name]: value
         }))
     }
+
+	async function handleGenerateStory(){
+		const response = await generateStoryboard()
+		console.log(response)
+	}
 
 
 	return (
@@ -116,7 +122,7 @@ export default function StoryForm({showStoryForm}: {showStoryForm:() => void}) {
 					className='rounded p-3 appearance-none'></textarea>
 
 				<div className="flex items-center justify-center">
-					<button className='bg-callToAction px-4 py-3 font-suseMedium rounded-sm hover:cursor-pointer hover:opacity-85'>
+					<button className='bg-callToAction px-4 py-3 font-suseMedium rounded-sm hover:cursor-pointer hover:opacity-85' onClick={handleGenerateStory }>
 						Generate Storyboard
 					</button>
 				</div>

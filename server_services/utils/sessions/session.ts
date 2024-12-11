@@ -36,5 +36,3 @@ export async function decrypt(session: string | undefined = "") {
 		console.log("Failed to verify session");
 	}
 }
-
-
