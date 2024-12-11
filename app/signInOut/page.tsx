@@ -10,6 +10,7 @@ import Spinner from "../../components/ui/spinner/spinner";
 import signIn from "@/client_services/clientSignIn";
 import { ErrorAlert } from "@/components/ui/alert/errorAlert";
 
+
 type formDataType = {
 	firstName: string;
 	lastName: string;
@@ -34,7 +35,7 @@ export default function signInOut() {
 	});
 
 	const [formState, setFormState] = useState<"sign up" | "sign in">(
-		"sign up"
+		"sign in"
 	);
 
 	const [formData, setFormData] = useState<formDataType>({

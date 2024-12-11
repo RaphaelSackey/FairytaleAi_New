@@ -10,13 +10,13 @@ import checkSignIn from "@/client_services/utils/checkSignIn";
 export default function Home() {
 
 	// check if user is already logged in 
-	useLayoutEffect(() => {
-		async function run(){
-			const alreadySignedIn = await checkSignIn()
-			console.log(alreadySignedIn )
-		}
-		run()		
-	})
+	// useLayoutEffect(() => {
+	// 	async function run(){
+	// 		const alreadySignedIn = await checkSignIn()
+	// 		console.log(alreadySignedIn )
+	// 	}
+	// 	run()		
+	// })
 	
 	const entries = [
 		{

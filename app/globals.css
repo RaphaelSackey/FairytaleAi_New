@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
   font-family: 'suse light';
   src: url('./fonts/SUSE-Light.ttf') format('truetype');
