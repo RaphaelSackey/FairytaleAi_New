@@ -1,12 +1,12 @@
 import {
 	hashPassword,
 	verifyPassword,
-} from "@/server_services/utils/hashPassword/encript";
+} from "@/server_actions/utils/hashPassword/encript";
 import {
 	createSession,
 	decrypt,
-} from "@/server_services/utils/sessions/session";
-import { getUser } from "@/server_services/database/databaseActions/databaseActions";
+} from "@/server_actions/utils/sessions/session";
+import { getUser } from "@/server_actions/database/databaseActions/databaseActions";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
 			const response = NextResponse.json({ message: "success" });
 			response.cookies.set("access_token", session, {
 				httpOnly: true,
-				secure: true,
+				secure: false,
 				expires: expiresAt,
 				sameSite: "lax",
 				path: "/",
