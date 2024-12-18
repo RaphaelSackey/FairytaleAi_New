@@ -1,7 +1,7 @@
-import axios from "axios";
+
 import axiosInstance from "./axiosInstance";
 
 export default async function checkSignIn(){
-    const results = await axios.get('/api/checksignedin')
+    const results = await axiosInstance.get('/checksignedin')
     return results.data
 }

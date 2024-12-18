@@ -4,6 +4,7 @@ import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import SceneCard from "./sceneCard";
 import getData from "@/client_actions/getStoryboardProgress";
+import { Progress } from "../progress/progress";
 
 type cardDataType = {
 	id: number;
@@ -15,7 +16,7 @@ type cardDataType = {
 
 type requestStateType = "complete" | "incomplete" | "error";
 
-export default function DragAndDropWrapper() {
+export default function DragAndDropWrapper({id}: {id: string}) {
 	const [data, setData] = useState([
 		{ id: 1 },
 		{ id: 2 },
@@ -25,7 +26,7 @@ export default function DragAndDropWrapper() {
 		{ id: 6 },
 	]);
 	const [requestState, setRequestState] =
-		useState<requestStateType>("complete");
+		useState<requestStateType>("incomplete");
 	const [progress, setProgress] = useState(0);
 	const [mounted, setMounted] = useState(false);
 	const [cardData, setCardData] = useState<cardDataType[] | null>(null);
@@ -36,8 +37,6 @@ export default function DragAndDropWrapper() {
 			key={item.id}
 		/>
 	));
-	// temp id need to be passed down from parent as a prop
-	const id = 10;
 
 	const handleDragEnd = (event: DragEndEvent) => {
 		const { active, over } = event;
@@ -62,11 +61,11 @@ export default function DragAndDropWrapper() {
 					clearInterval(intervalId);
 					setRequestState("complete");
 					setProgress(data.numProg);
+					console.log(data.data)
 					setCardData(data.data);
 				} else if (data.status === "error") {
 					console.log("there was an error");
 					setRequestState("error");
-					setProgress(data.numProg);
 					clearInterval(intervalId);
 				} else if (data.status === "incomplete") {
 					setProgress(data.numProg);
@@ -79,7 +78,17 @@ export default function DragAndDropWrapper() {
 
 	return mounted ? (
 		<DndContext onDragEnd={handleDragEnd}>
-			<div className='grid grid-cols-1 px-6 w-5/6 md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4 '>
+			{requestState === "incomplete" && (
+				<div className='w-full mb-5'>
+					<Progress value={progress} />
+				</div>
+			)}
+			<div
+				className={
+					requestState === "complete" || requestState === 'error'
+						? "grid grid-cols-1 px-6 w-5/6 md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+						: "grid grid-cols-1 px-6 w-5/6 md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse"
+				}>
 				<SortableContext items={data}>{cards}</SortableContext>
 			</div>
 		</DndContext>

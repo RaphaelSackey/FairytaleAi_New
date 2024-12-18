@@ -25,10 +25,7 @@ export default async function Storyboard({
 					Download
 				</button>
 			</div>
-			<div className='w-full mb-5'>
-				<Progress value={35} />
-			</div>
-			<DragAndDropWrapper />
+			<DragAndDropWrapper id = {id}/>
 		</div>
 	);
 }

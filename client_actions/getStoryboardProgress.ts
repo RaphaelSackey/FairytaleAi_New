@@ -17,7 +17,7 @@ type dataType = {
 
 type requestStateType = "complete" | "incomplete" | "error";
 
-export default async function getData(id: Number){
+export default async function getData(id: string){
     try {
         const response = await axiosInstance.get(
             `generatestoryboard/${id}`
@@ -26,7 +26,7 @@ export default async function getData(id: Number){
         return data
     
     } catch (e) {
-        console.log('i am running');
+        console.log(e);
         return {status: 'error', numProg: 0, data: []}
     }
 

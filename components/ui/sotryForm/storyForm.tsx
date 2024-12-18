@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import generateStoryboard from "@/client_actions/getStoryboardProgress";
 import { redirect } from "next/navigation";
+import generateStory from "@/client_actions/generateStory";
 
 type storyPromptType = {
 	storyboardType: "black and white";
@@ -46,8 +46,8 @@ export default function StoryForm({
 		event: React.FormEvent<HTMLFormElement>
 	) {
 		event.preventDefault();
-		const response = await generateStoryboard();
-		redirect("/storyboard/2");
+		const {id} = await generateStory(formData);
+		redirect(`/storyboard/${id}`);
 	}
 
 	return (
@@ -95,7 +95,7 @@ export default function StoryForm({
 				</div>
 
 				<label
-					htmlFor='storyboardType'
+					htmlFor='artStyle'
 					className='font-suseLight'>
 					Art Style:
 				</label>
@@ -127,7 +127,7 @@ export default function StoryForm({
 				</div>
 
 				<label
-					htmlFor='frameCount'
+					htmlFor='sceneNumber'
 					className='font-suseLight'>
 					Number of Scenes:
 				</label>
@@ -144,7 +144,7 @@ export default function StoryForm({
 				/>
 
 				<label
-					htmlFor='description'
+					htmlFor='prompt'
 					className='font-suseLight'>
 					Write Prompt:
 				</label>

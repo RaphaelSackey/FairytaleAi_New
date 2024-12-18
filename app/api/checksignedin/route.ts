@@ -4,7 +4,7 @@ import { decrypt } from "@/server_actions/utils/sessions/session";
 
 export async function GET() {
 	const cook = (await cookies()).get("access_token");
-	console.log(cook)
+	// console.log(cook)
 	if (!cook) {
 		return NextResponse.json({ message: "not logged in" });
 	} else {
