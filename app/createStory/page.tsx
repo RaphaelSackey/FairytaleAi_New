@@ -1,24 +1,23 @@
 "use client";
 import { useEffect, useState } from "react";
-import checkSignIn from "@/client_services/utils/checkSignIn";
+import checkSignIn from "@/client_actions/utils/checkSignIn";
 import { NormalAlert } from "@/components/ui/alert/normalAlert";
 import AddStoryCard from "@/components/ui/addStory/addStoryCard";
 import StoryCard from "@/components/ui/storyCard/storyCard.jsx";
 import StoryForm from "@/components/ui/sotryForm/storyForm";
-import { useLogInStatus} from "@/contexts/loggedInStatusContext";
+import { useLogInStatus } from "@/contexts/loggedInStatusContext";
 
 export default function CreateStory() {
 	const [showStoryForm, setShowStoryForm] = useState(false);
-	const {loggedInStatus, setLoggedInStatus} = useLogInStatus()
+	const { loggedInStatus, setLoggedInStatus } = useLogInStatus();
 
 	useEffect(() => {
 		async function run() {
 			const alreadySignedIn = await checkSignIn();
-			setLoggedInStatus(alreadySignedIn.message === "logged in");		
+			setLoggedInStatus(alreadySignedIn.message === "logged in");
 		}
 		run();
-	},[]);
-
+	}, []);
 
 	function handleShowStoryForm() {
 		setShowStoryForm((prev) => !prev);

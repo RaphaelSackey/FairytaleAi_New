@@ -3,13 +3,12 @@
 import { useState } from "react";
 import CreateAccount, {
 	CreateAccountTypes,
-} from "../../client_services/createAccount";
+} from "../../client_actions/createAccount";
 import { Axios, AxiosResponse } from "axios";
 import { redirect } from "next/navigation";
 import Spinner from "../../components/ui/spinner/spinner";
-import signIn from "@/client_services/clientSignIn";
+import signIn from "@/client_actions/clientSignIn";
 import { ErrorAlert } from "@/components/ui/alert/errorAlert";
-
 
 type formDataType = {
 	firstName: string;
@@ -49,13 +48,12 @@ export default function signInOut() {
 	const [loader, setLoader] = useState<boolean>(false);
 
 	function toggleShowAlert(message: string) {
-		console.log('called')
+		console.log("called");
 		setShowAlert((prev) => ({ state: !prev.state, message: message }));
 
 		setTimeout(() => {
-			setShowAlert({ state: false, message: '' });
-		}, 4000); 
-
+			setShowAlert({ state: false, message: "" });
+		}, 4000);
 	}
 
 	function changeLoader() {
@@ -108,11 +106,11 @@ export default function signInOut() {
 				toggleShowAlert("An account already exists with this email");
 				// alert("An account already exists with this email");
 			} else {
-				toggleShowAlert("something went wrong please try again")
+				toggleShowAlert("something went wrong please try again");
 				// alert("something went wrong please try again");
 			}
 		} else {
-			toggleShowAlert("Passwords do not match")
+			toggleShowAlert("Passwords do not match");
 			// alert("Passwords do not match");
 		}
 		changeLoader();
@@ -136,7 +134,7 @@ export default function signInOut() {
 			toggleShowAlert("Wrong Password");
 			// alert("Wrong Password");
 		} else {
-			toggleShowAlert("An account with this email does not exist")
+			toggleShowAlert("An account with this email does not exist");
 			// alert("An account with this email does not exist");
 		}
 

@@ -13,7 +13,7 @@ export default function SceneCard({ id }: { id: number }) {
 
 	return (
 		<div
-			className=' h-96 w-full rounded-t-lg animate-pulse'
+			className=' h-96 w-full rounded-t-lg'
 			ref={setNodeRef}
 			{...attributes}
 			{...listeners}
