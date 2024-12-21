@@ -1,4 +1,4 @@
-import db from "../setup";
+import db from "../firebaseSetup";
 import { dataType } from "./types";
 import { hashPassword } from "@/server_actions/utils/hashPassword/encript";
 import {
@@ -11,6 +11,7 @@ import {
 	arrayUnion,
 	doc,
 	updateDoc,
+	getDoc
 } from "firebase/firestore";
 
 export async function addUser(data: dataType) {
@@ -100,7 +101,10 @@ export async function checkUserOwnsProject(
 	return projects.includes(id);
 }
 
-export async function addUserProject(userId: string | unknown, projectId: string) {
+export async function addNewUserProject(
+	userId: string | unknown,
+	projectId: string
+) {
 	const usersColReference = collection(db, "Users");
 	const q = query(usersColReference, where("email", "==", userId));
 	const info = await getDocs(q);
@@ -109,4 +113,24 @@ export async function addUserProject(userId: string | unknown, projectId: string
 	await updateDoc(userDocRef, {
 		projects: arrayUnion(projectId),
 	});
+}
+
+export async function addProjectSceneContents(content: {}, projectId: string) {
+	const usersColReference = collection(db, "Projects")
+	const userDocRef = doc(usersColReference, projectId)
+
+	await updateDoc(userDocRef, {
+		scenes: arrayUnion(content),
+	});
+
+}
+
+
+export async function getProjectSceneInfo(projectId: string){
+	const usersColReference = collection(db, "Projects")
+	const userDocRef = doc(usersColReference, projectId)
+
+	const data = await getDoc(userDocRef)
+
+	return data.data()
 }

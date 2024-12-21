@@ -29,6 +29,6 @@
 		".next/types/**/*.ts",
 		"server_services/database/databaseActions/databaseActions.ts",
 		"server_services/database/setup.ts"
-	],
+, "server_actions/ai/gemini/geminiSetup.ts"	],
 	"exclude": ["node_modules"]
 }

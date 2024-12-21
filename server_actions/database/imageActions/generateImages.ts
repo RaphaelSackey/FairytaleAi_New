@@ -4,7 +4,7 @@ export async function generateImages(id:string, data:any ){
     return new Promise((resolve) => {
         setTimeout(() => {
             removeFromInProgress(id);
-            resolve(['a', 'b', 'c']);
+            resolve(data);
         }, 10000);
     });
       

@@ -12,7 +12,7 @@ export async function createSession(payload: any) {
 	const session = await new SignJWT(payload)
 		.setProtectedHeader({ alg: "HS256" })
 		.setIssuedAt()
-		.setExpirationTime("2m")
+		.setExpirationTime("15m")
 		.sign(encodedKey);
 	// const response = NextResponse.json({ message: 'success' }); 
 	// response.cookies.set("session", session, {

@@ -5,94 +5,107 @@ import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import SceneCard from "./sceneCard";
 import getData from "@/client_actions/getStoryboardProgress";
 import { Progress } from "../progress/progress";
-
-type cardDataType = {
-	id: number;
-	description: string;
-	dialog: string;
-	action: string;
-	position: number;
-};
+import { dataType as sceneDataType } from "@/client_actions/getStoryboardProgress";
 
 type requestStateType = "complete" | "incomplete" | "error";
 
-export default function DragAndDropWrapper({id}: {id: string}) {
-	const [data, setData] = useState([
-		{ id: 1 },
-		{ id: 2 },
-		{ id: 3 },
-		{ id: 4 },
-		{ id: 5 },
-		{ id: 6 },
-	]);
-	const [requestState, setRequestState] =
-		useState<requestStateType>("incomplete");
-	const [progress, setProgress] = useState(0);
-	const [mounted, setMounted] = useState(false);
-	const [cardData, setCardData] = useState<cardDataType[] | null>(null);
+export default function DragAndDropWrapper({ id }: { id: string }) {
+    const [sortableItems, setSortableItems] = useState<number[]>([]);
+    const [requestState, setRequestState] = useState<requestStateType>("incomplete");
+    const [progress, setProgress] = useState(0);
+    const [mounted, setMounted] = useState(false);
+    const [cardData, setCardData] = useState<sceneDataType | null>(null);
+    const [sortedScenes, setSortedScenes] = useState<any[]>([]);
 
-	const cards = data.map((item) => (
-		<SceneCard
-			id={item.id}
-			key={item.id}
-		/>
-	));
+    useEffect(() => {
+        if (cardData?.scenes?.[0]?.scenes) {
+            const initialItems = cardData.scenes[0].scenes.map(item => Number(item.sceneNumber));
+            setSortableItems(initialItems);
+            setSortedScenes(cardData.scenes[0].scenes);
+        }
+    }, [cardData]);
 
-	const handleDragEnd = (event: DragEndEvent) => {
-		const { active, over } = event;
-		if (over?.id !== active.id) {
-			setData((prev) => {
-				const curPos = prev.findIndex((item) => item.id === active.id);
-				const newPos = prev.findIndex((item) => item.id === over?.id);
+    useEffect(() => {
+        // Update sortedScenes based on sortableItems' new order
+        if (cardData?.scenes?.[0]?.scenes) {
+            const updatedScenes = sortableItems.map(itemId =>
+                cardData.scenes[0].scenes.find(scene => Number(scene.sceneNumber) === itemId)
+            );
+            setSortedScenes(updatedScenes);
+        }
+    }, [sortableItems, cardData]);
 
-				return arrayMove(prev, curPos, newPos);
-			});
-		}
-	};
+    const cards = sortedScenes.map(item => (
+        <SceneCard
+            id={Number(item.sceneNumber)}
+            key={Number(item.sceneNumber)}
+            link={undefined}
+            description={item.description}
+            dialog={undefined}
+            action={undefined}
+        />
+    ));
 
-	useEffect(() => setMounted(true));
+    const handleDragEnd = (event: DragEndEvent) => {
+        const { active, over } = event;
+        if (over?.id !== active.id) {
+            setSortableItems(prev => {
+                const curPos = prev.findIndex(item => item === Number(active.id));
+                const newPos = prev.findIndex(item => item === Number(over?.id));
+                return arrayMove(prev, curPos, newPos);
+            });
+        }
+    };
 
-	useEffect(() => {
-		const intervalId = setInterval(async () => {
-			if (requestState === "incomplete") {
-				const data = await getData(id);
+    useEffect(() => setMounted(true), []);
 
-				if (data.status == "complete") {
-					clearInterval(intervalId);
-					setRequestState("complete");
-					setProgress(data.numProg);
-					console.log(data.data)
-					setCardData(data.data);
-				} else if (data.status === "error") {
-					console.log("there was an error");
-					setRequestState("error");
-					clearInterval(intervalId);
-				} else if (data.status === "incomplete") {
-					setProgress(data.numProg);
-				}
-			}
-		}, 2000);
+    useEffect(() => {
+        const intervalId = setInterval(async () => {
+            if (requestState === "incomplete") {
+                try {
+                    const data = await getData(id);
 
-		return () => clearInterval(intervalId);
-	}, []);
+                    if (data.status === "complete") {
+                        clearInterval(intervalId);
+                        setRequestState("complete");
+                        setProgress(data.numProg);
+                        setCardData(data.data);
+                    } else if (data.status === "error") {
+                        console.error("There was an error fetching data.");
+                        setRequestState("error");
+                        clearInterval(intervalId);
+                    } else if (data.status === "incomplete") {
+                        setProgress(data.numProg);
+                    }
+                } catch (error) {
+                    console.error("Error during data fetch:", error);
+                    setRequestState("error");
+                    clearInterval(intervalId);
+                }
+            }
+        }, 2000);
 
-	return mounted ? (
-		<DndContext onDragEnd={handleDragEnd}>
-			{requestState === "incomplete" && (
-				<div className='w-full mb-5'>
-					<Progress value={progress} />
-				</div>
-			)}
-			<div
-				className={
-					requestState === "complete" || requestState === 'error'
-						? "grid grid-cols-1 px-6 w-5/6 md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-						: "grid grid-cols-1 px-6 w-5/6 md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse"
-				}>
-				<SortableContext items={data}>{cards}</SortableContext>
-			</div>
-		</DndContext>
-	) : (
-		<div></div>
-	);
+        return () => clearInterval(intervalId);
+    }, [id, requestState]);
+
+    return mounted ? (
+        <DndContext onDragEnd={handleDragEnd}>
+            {requestState === "incomplete" && (
+                <div className="w-full mb-5">
+                    <Progress value={progress} />
+                </div>
+            )}
+            <div
+                className={
+                    requestState === "complete" || requestState === "error"
+                        ? "grid grid-cols-1 px-6 w-5/6 md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+                        : "grid grid-cols-1 px-6 w-5/6 md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse"
+                }
+            >
+                <SortableContext items={sortableItems}>{cards}</SortableContext>
+            </div>
+        </DndContext>
+    ) : (
+        <div></div>
+    );
 }

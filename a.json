@@ -1,0 +1,99 @@
+[
+    {
+        "scenes": [
+            {
+                "characters": [
+                    {
+                        "description": "Girl, 5'5\", slim build, long straight brown hair, light brown skin, kind eyes, wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers.",
+                        "name": "Alice"
+                    },
+                    {
+                        "description": "Guy, 6'0\", average build, short spiky black hair, light tan skin, neutral facial expression, wearing a gray t-shirt, dark blue jeans, and black sneakers.",
+                        "name": "Bob"
+                    }
+                ],
+                "description": "Alice sits on a park bench. She has long straight brown hair and is wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers. She is looking down at a smartphone in her hands. The bench is made of dark brown wood, and it is in good condition. The smartphone is black and rectangular with slightly rounded corners. A guy with short spiky black hair walks by; he has light tan skin and is wearing a gray t-shirt, dark blue jeans, and black sneakers.The sidewalk is made of light gray concrete.",
+                "objects": [
+                    {
+                        "description": "Wooden bench; dark brown; 6 ft long; 2 ft high, in good condition; placed against a tree, a little bit to the right from the center of the sidewalk.",
+                        "name": "Bench"
+                    },
+                    {
+                        "description": "Black rectangle smartphone, approximately 6 inches long,  In good condition, held in Alice's hands.",
+                        "name": "Smartphone"
+                    }
+                ],
+                "sceneNumber": "1"
+            },
+            {
+                "characters": [
+                    {
+                        "description": "Girl, 5'5\", slim build, long straight brown hair, light brown skin, kind eyes, wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers.",
+                        "name": "Alice"
+                    },
+                    {
+                        "description": "Guy, 6'0\", average build, short spiky black hair, light tan skin, surprised facial expression, wearing a gray t-shirt, dark blue jeans, and black sneakers.",
+                        "name": "Bob"
+                    }
+                ],
+                "description": "Alice is still sitting on the park bench, looking down at her smartphone. The bench is made of dark brown wood, and it is in good condition. Bob trips and is falling on the light gray concrete sidewalk in front of her. He is wearing a gray t-shirt, dark blue jeans, and black sneakers.",
+                "objects": [
+                    {
+                        "description": "Wooden bench; dark brown; 6 ft long; 2 ft high, in good condition; placed against a tree, a little bit to the right from the center of the sidewalk.",
+                        "name": "Bench"
+                    },
+                    {
+                        "description": "Black rectangle smartphone, approximately 6 inches long,  In good condition, held in Alice's hands.",
+                        "name": "Smartphone"
+                    }
+                ],
+                "sceneNumber": "2"
+            },
+            {
+                "characters": [
+                    {
+                        "description": "Girl, 5'5\", slim build, long straight brown hair, light brown skin, concerned expression, wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers.",
+                        "name": "Alice"
+                    },
+                    {
+                        "description": "Guy, 6'0\", average build, short spiky black hair, light tan skin, pained expression, wearing a gray t-shirt, dark blue jeans, and black sneakers.",
+                        "name": "Bob"
+                    }
+                ],
+                "description": "Alice is looking at Bob who has now fallen on the ground in front of her. She's on a park bench; which is made of dark brown wood, 6ft long, and is in good condition.The smartphone is black, rectangular, approximately 6 inches long, and held in Alice's hand; Bob is on the ground in front of her and seems to be injured. The sidewalk is light gray concrete.",
+                "objects": [
+                    {
+                        "description": "Wooden bench; dark brown; 6 ft long; 2 ft high, in good condition; placed against a tree, a little bit to the right from the center of the sidewalk.",
+                        "name": "Bench"
+                    },
+                    {
+                        "description": "Black rectangle smartphone, approximately 6 inches long, In good condition, held in Alice's hands.",
+                        "name": "Smartphone"
+                    }
+                ],
+                "sceneNumber": "3"
+            },
+            {
+                "characters": [
+                    {
+                        "description": "Girl, 5'5\", slim build, long straight brown hair, light brown skin, concerned expression, wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers.",
+                        "name": "Alice"
+                    },
+                    {
+                        "description": "Guy, 6'0\", average build, short spiky black hair, light tan skin, pained expression, wearing a gray t-shirt, dark blue jeans, and black sneakers.",
+                        "name": "Bob"
+                    }
+                ],
+                "description": "Close up of Alice and Bob. Alice is still sitting on the park bench made of dark brown wood; 6 ft long, 2 ft high and is in good condition.She has a concerned look on her face; and has long straight brown hair. Bob is on the ground, appearing hurt, on the light gray concrete sidewalk; and he has light tan skin. Alice is wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers. Bob is wearing a gray t-shirt, dark blue jeans, and black sneakers.",
+                "objects": [
+                    {
+                        "description": "Wooden bench; dark brown; 6 ft long; 2 ft high, in good condition; placed against a tree, a little bit to the right from the center of the sidewalk.",
+                        "name": "Bench"
+                    }
+                ],
+                "sceneNumber": "4"
+            }
+        ],
+        "style": "line drawn black and white"
+    }
+]
