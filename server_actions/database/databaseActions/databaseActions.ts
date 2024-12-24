@@ -134,3 +134,9 @@ export async function getProjectSceneInfo(projectId: string){
 
 	return data.data()
 }
+
+
+export async function addImageLinksToUserProject(links: Array<string>, projectId: string){
+    const usersColReference = collection(db, "imageLinks")
+	await addDoc(usersColReference, {projectId: projectId, imageUrls: links } )
+}

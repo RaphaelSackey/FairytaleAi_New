@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createProject, addToInProgress, checkInProgress, checkUserOwnsProject } from "@/server_actions/database/databaseActions/databaseActions";
-import { generateImages } from "@/server_actions/database/imageActions/generateImages";
 import { cookies } from "next/headers";
 import { decrypt } from "@/server_actions/utils/sessions/session";
 import { addNewUserProject } from "@/server_actions/database/databaseActions/databaseActions";

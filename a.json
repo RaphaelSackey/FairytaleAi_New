@@ -1,99 +1,83 @@
 [
     {
+        "style": "line drawn black and white",
         "scenes": [
             {
-                "characters": [
-                    {
-                        "description": "Girl, 5'5\", slim build, long straight brown hair, light brown skin, kind eyes, wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers.",
-                        "name": "Alice"
-                    },
-                    {
-                        "description": "Guy, 6'0\", average build, short spiky black hair, light tan skin, neutral facial expression, wearing a gray t-shirt, dark blue jeans, and black sneakers.",
-                        "name": "Bob"
-                    }
-                ],
-                "description": "Alice sits on a park bench. She has long straight brown hair and is wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers. She is looking down at a smartphone in her hands. The bench is made of dark brown wood, and it is in good condition. The smartphone is black and rectangular with slightly rounded corners. A guy with short spiky black hair walks by; he has light tan skin and is wearing a gray t-shirt, dark blue jeans, and black sneakers.The sidewalk is made of light gray concrete.",
+                "sceneNumber": "1",
                 "objects": [
                     {
-                        "description": "Wooden bench; dark brown; 6 ft long; 2 ft high, in good condition; placed against a tree, a little bit to the right from the center of the sidewalk.",
-                        "name": "Bench"
-                    },
-                    {
-                        "description": "Black rectangle smartphone, approximately 6 inches long,  In good condition, held in Alice's hands.",
-                        "name": "Smartphone"
+                        "name": "Tote bag",
+                        "description": "A small, black, canvas tote bag with a short shoulder strap.  It's fairly new and clean. It is slung over her left shoulder. "
                     }
                 ],
-                "sceneNumber": "1"
+                "description": "Alice stands on a quiet sidewalk. A few leaves are scattered on the ground. She smiles and looks to her right.The scene is set in the daytime, the sky is clear and mostly sunny, no shadows are noticeable, and the overall mood is peaceful.",
+                "characters": [
+                    {
+                        "name": "Alice",
+                        "description": "A young woman, 5'5\" tall, with a slender build. She has shoulder-length, wavy brown hair, fair skin, and bright, expressive eyes. She wears a simple, knee-length, dark gray A-line skirt, a white short sleeve shirt with a subtle floral pattern, black ankle boots, and no accessories.  She carries a small, black tote bag. She is smiling gently."
+                    }
+                ]
             },
             {
-                "characters": [
-                    {
-                        "description": "Girl, 5'5\", slim build, long straight brown hair, light brown skin, kind eyes, wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers.",
-                        "name": "Alice"
-                    },
-                    {
-                        "description": "Guy, 6'0\", average build, short spiky black hair, light tan skin, surprised facial expression, wearing a gray t-shirt, dark blue jeans, and black sneakers.",
-                        "name": "Bob"
-                    }
-                ],
-                "description": "Alice is still sitting on the park bench, looking down at her smartphone. The bench is made of dark brown wood, and it is in good condition. Bob trips and is falling on the light gray concrete sidewalk in front of her. He is wearing a gray t-shirt, dark blue jeans, and black sneakers.",
                 "objects": [
                     {
-                        "description": "Wooden bench; dark brown; 6 ft long; 2 ft high, in good condition; placed against a tree, a little bit to the right from the center of the sidewalk.",
-                        "name": "Bench"
+                        "description": "A simple, light brown wooden park bench, moderately weathered. It sits below three nearly identical, somewhat sparsely leaved trees. Its placement and position are shown without too much details, suggesting a relatively ordinary environment, clean and uncluttered.",
+                        "name": "Park Bench"
                     },
                     {
-                        "description": "Black rectangle smartphone, approximately 6 inches long,  In good condition, held in Alice's hands.",
-                        "name": "Smartphone"
+                        "description": "A small, black, canvas tote bag with a short shoulder strap. It's fairly new and clean. She is holding the tote bag.",
+                        "name": "Tote bag"
                     }
                 ],
-                "sceneNumber": "2"
+                "characters": [
+                    {
+                        "name": "Alice",
+                        "description": "A young woman, 5'5\" tall, with a slender build. She has shoulder-length, wavy brown hair, fair skin, and bright, expressive eyes. She wears a simple, knee-length, dark gray A-line skirt, a white short sleeve shirt with a subtle floral pattern, black ankle boots, and no accessories.  She carries a small, black tote bag. Her expression is thoughtful, and slightly concerned. "
+                    }
+                ],
+                "sceneNumber": "2",
+                "description": "Alice is seated on a park bench looking towards the trees ahead.  A park bench and 3 trees that look identical can be seen in the background.  The scene is set during the daytime, the sky is clear, mostly sunny, and no shadows are noticeable, creating a calm ambiance. "
             },
             {
-                "characters": [
-                    {
-                        "description": "Girl, 5'5\", slim build, long straight brown hair, light brown skin, concerned expression, wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers.",
-                        "name": "Alice"
-                    },
-                    {
-                        "description": "Guy, 6'0\", average build, short spiky black hair, light tan skin, pained expression, wearing a gray t-shirt, dark blue jeans, and black sneakers.",
-                        "name": "Bob"
-                    }
-                ],
-                "description": "Alice is looking at Bob who has now fallen on the ground in front of her. She's on a park bench; which is made of dark brown wood, 6ft long, and is in good condition.The smartphone is black, rectangular, approximately 6 inches long, and held in Alice's hand; Bob is on the ground in front of her and seems to be injured. The sidewalk is light gray concrete.",
+                "description": "Alice is standing next to a lamp post at the corner of a street. A few people are walking around in the background without any detail. The scene takes place during daytime under clear and mostly sunny weather and an overall neutral, unnoticeable mood and lighting. ",
                 "objects": [
                     {
-                        "description": "Wooden bench; dark brown; 6 ft long; 2 ft high, in good condition; placed against a tree, a little bit to the right from the center of the sidewalk.",
-                        "name": "Bench"
+                        "description": "A tall, slender, gray metal lamppost, typical of city streets, situated to one side of Alice at a corner of a street. No significant features are needed except that the post should be tall and upright., nothing is shown in detail, such as wiring or attachments.",
+                        "name": "Lamppost"
                     },
                     {
-                        "description": "Black rectangle smartphone, approximately 6 inches long, In good condition, held in Alice's hands.",
-                        "name": "Smartphone"
+                        "name": "Tote bag",
+                        "description": "A small, black, canvas tote bag with a short shoulder strap. It's fairly new and clean. She is carrying this over her shoulder."
+                    }
+                ],
+                "characters": [
+                    {
+                        "description": "A young woman, 5'5\" tall, with a slender build. She has shoulder-length, wavy brown hair, fair skin, and bright, expressive eyes. She wears a simple, knee-length, dark gray A-line skirt, a white short sleeve shirt with a subtle floral pattern, black ankle boots, and no accessories. She carries a small, black tote bag. She's looking down, pensively. ",
+                        "name": "Alice"
                     }
                 ],
                 "sceneNumber": "3"
             },
             {
-                "characters": [
-                    {
-                        "description": "Girl, 5'5\", slim build, long straight brown hair, light brown skin, concerned expression, wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers.",
-                        "name": "Alice"
-                    },
-                    {
-                        "description": "Guy, 6'0\", average build, short spiky black hair, light tan skin, pained expression, wearing a gray t-shirt, dark blue jeans, and black sneakers.",
-                        "name": "Bob"
-                    }
-                ],
-                "description": "Close up of Alice and Bob. Alice is still sitting on the park bench made of dark brown wood; 6 ft long, 2 ft high and is in good condition.She has a concerned look on her face; and has long straight brown hair. Bob is on the ground, appearing hurt, on the light gray concrete sidewalk; and he has light tan skin. Alice is wearing a long-sleeved white t-shirt, blue jeans, and white canvas sneakers. Bob is wearing a gray t-shirt, dark blue jeans, and black sneakers.",
+                "description": "Alice is observing a flower and looks relaxed while facing downwards. The flower, a single daisy with simple line details, rests beside her left foot at a quiet garden setting that's simple. Daylight setting; calm weather, with mostly bright sunlight without harsh shadows; The general mood is tranquil and serene, slightly peaceful. ",
+                "sceneNumber": "4",
                 "objects": [
                     {
-                        "description": "Wooden bench; dark brown; 6 ft long; 2 ft high, in good condition; placed against a tree, a little bit to the right from the center of the sidewalk.",
-                        "name": "Bench"
+                        "description": "A single daisy with white petals and a yellow center, drawn simply. No details of leaves or stems. The focus should be a single simple-line-drawn flower. It is shown as very minimalist with no more additional description that what has been described already.",
+                        "name": "Daisy"
+                    },
+                    {
+                        "name": "Tote bag",
+                        "description": "A small, black, canvas tote bag with a short shoulder strap. It's fairly new and clean. She is holding this in her left hand."
                     }
                 ],
-                "sceneNumber": "4"
+                "characters": [
+                    {
+                        "description": "A young woman, 5'5\" tall, with a slender build. She has shoulder-length, wavy brown hair, fair skin, and bright, expressive eyes. She wears a simple, knee-length, dark gray A-line skirt, a white short sleeve shirt with a subtle floral pattern, black ankle boots, and no accessories. She carries a small, black tote bag.  She has a thoughtful expression, looking toward a flower that appears in the foreground.",
+                        "name": "Alice"
+                    }
+                ]
             }
-        ],
-        "style": "line drawn black and white"
+        ]
     }
 ]
