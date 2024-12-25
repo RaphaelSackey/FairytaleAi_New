@@ -140,3 +140,15 @@ export async function addImageLinksToUserProject(links: Array<string>, projectId
     const usersColReference = collection(db, "imageLinks")
 	await addDoc(usersColReference, {projectId: projectId, imageUrls: links } )
 }
+
+export async function getProjectImageLinks(projectId: string){
+	const usersColReference = collection(db, "imageLinks")
+	const q = query(usersColReference, where("projectId", "==", projectId));
+	const info = await getDocs(q);
+
+	if (!info.empty) {
+		return info.docs[0].data().imageUrls;
+	} else {
+		return null;
+	}
+}

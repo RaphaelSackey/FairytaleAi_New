@@ -8,6 +8,7 @@ import { Progress } from "../progress/progress";
 import { dataType as sceneDataType } from "@/client_actions/getStoryboardProgress";
 import Image from "next/image";
 import generateCardImages from "@/client_actions/generateCardImages";
+import { getProjectImages } from "@/client_actions/getProjectImages";
 
 type requestStateType = "complete" | "incomplete" | "error";
 
@@ -18,6 +19,7 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
     const [mounted, setMounted] = useState(false);
     const [cardData, setCardData] = useState<sceneDataType | null>(null);
     const [sortedScenes, setSortedScenes] = useState<any[]>([]);
+    const [imageUrls, setImageUrls] = useState<Array<{sceneNumber: Number, url: string}>>([]);
 
     useEffect(() => {
         if (cardData?.scenes?.[0]?.scenes) {
@@ -35,13 +37,30 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
             );
             setSortedScenes(updatedScenes);
         }
+        
+        if (imageUrls.length === sortedScenes.length) {
+            const updatedImages = sortableItems.map(itemId =>
+                imageUrls.find(image => image.sceneNumber === itemId)
+            ).filter((image): image is { sceneNumber: Number; url: string } => image !== undefined);
+            setImageUrls(updatedImages);
+        }
     }, [sortableItems, cardData]);
 
-    const cards = sortedScenes.map(item => (
+    useEffect(() => {
+        async function doIt() {
+            const response = await getProjectImages(id);
+            if (response.hasImages) {
+                setImageUrls(response.images.map((url, index) => ({sceneNumber: index + 1, url})));
+            }
+        }
+        doIt()
+    }, [])
+    
+    const cards = sortedScenes.map((item) => (
         <SceneCard
             id={Number(item.sceneNumber)}
             key={Number(item.sceneNumber)}
-            link={'https://firebasestorage.googleapis.com/v0/b/fairytaleai-caa77.firebasestorage.app/o/fairytaleAi%2Fhttps%3A%2Foaidalleapiprodscus.blob.core.windows.net%2Fprivate%2Forg-uJYb964o3WKlGfxddWRK62Zg%2Fuser-UVDdtF3SfHTE1Jr3k7rFRznD%2Fimg-7TV03EWQk1q1saq9rUsQffOQ.png%3Fst%3D2024-12-24T07%253A03%253A50Z%26se%3D2024-12-24T09%253A03%253A50Z%26sp%3Dr%26sv%3D2024-08-04%26sr%3Db%26rscd%3Dinline%26rsct%3Dimage%2Fpng%26skoid%3Dd505667d-d6c1-4a0a-bac7-5c84a87759f8%26sktid%3Da48cca56-e6da-484e-a814-9c849652bcb3%26skt%3D2024-12-23T20%253A36%253A20Z%26ske%3D2024-12-24T20%253A36%253A20Z%26sks%3Db%26skv%3D2024-08-04%26sig%3DsJ0sJLCx5IacoQYdh27mTpfE%252Bn7JSIOm%2FHpqzkvtpPc%253D?alt=media&token=a5f6e6f6-431c-49d6-8f2f-be197308af7c'}
+            link={imageUrls.length === sortedScenes.length ? (imageUrls.find(urlObj => urlObj.sceneNumber === Number(item.sceneNumber) ))?.url : undefined}
             description={item.description}
             dialog={undefined}
             action={undefined}
@@ -49,10 +68,12 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
     ));
 
     async function generateImages() {
-        // setRequestState("incomplete");
+        setRequestState("incomplete");
         const response = await generateCardImages(cardData?.scenes, id)
-        // setRequestState("complete")
-        console.log(response)
+        const imageUrls = response?.data.data
+        setImageUrls(imageUrls.map((url:any, index:number) => ({sceneNumber: index + 1, url}))); 
+        setRequestState(response?.data.status)
+
     }
 
     const handleDragEnd = (event: DragEndEvent) => {
@@ -96,12 +117,13 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
         }, 2000);
 
         return () => clearInterval(intervalId);
-    }, [id, requestState]);
+    }, []);
+    // [id, requestState]: this is the old params, use this is the progress is not updating
 
     return mounted ? (
         <DndContext onDragEnd={handleDragEnd}>
             <div className='flex justify-end w-full mb-5 gap-2'>
-				<button className='w-fit h-11 rounded-lg bg-gradient-to-r from-orange-500  to-varCallToAction flex items-center justify-center px-2 hover:scale-105 ease-in-out transition-transform ' onClick={generateImages}>
+				{imageUrls.length === 0 && <button className='w-fit h-11 rounded-lg bg-gradient-to-r from-orange-500  to-varCallToAction flex items-center justify-center px-2 hover:scale-105 ease-in-out transition-transform ' onClick={generateImages}>
 					Generate Images{" "}
 					<Image
 						src='/assets/ai.png'
@@ -109,7 +131,7 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
 						width={40}
 						alt='ai'
 					/>
-				</button>
+				</button>}
 				<button className='w-36 h-11 border rounded-lg'>
 					Download
 				</button>

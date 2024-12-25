@@ -1,83 +1,42 @@
-[
-    {
-        "style": "line drawn black and white",
-        "scenes": [
-            {
-                "sceneNumber": "1",
-                "objects": [
-                    {
-                        "name": "Tote bag",
-                        "description": "A small, black, canvas tote bag with a short shoulder strap.  It's fairly new and clean. It is slung over her left shoulder. "
-                    }
-                ],
-                "description": "Alice stands on a quiet sidewalk. A few leaves are scattered on the ground. She smiles and looks to her right.The scene is set in the daytime, the sky is clear and mostly sunny, no shadows are noticeable, and the overall mood is peaceful.",
-                "characters": [
-                    {
-                        "name": "Alice",
-                        "description": "A young woman, 5'5\" tall, with a slender build. She has shoulder-length, wavy brown hair, fair skin, and bright, expressive eyes. She wears a simple, knee-length, dark gray A-line skirt, a white short sleeve shirt with a subtle floral pattern, black ankle boots, and no accessories.  She carries a small, black tote bag. She is smiling gently."
-                    }
-                ]
-            },
-            {
-                "objects": [
-                    {
-                        "description": "A simple, light brown wooden park bench, moderately weathered. It sits below three nearly identical, somewhat sparsely leaved trees. Its placement and position are shown without too much details, suggesting a relatively ordinary environment, clean and uncluttered.",
-                        "name": "Park Bench"
-                    },
-                    {
-                        "description": "A small, black, canvas tote bag with a short shoulder strap. It's fairly new and clean. She is holding the tote bag.",
-                        "name": "Tote bag"
-                    }
-                ],
-                "characters": [
-                    {
-                        "name": "Alice",
-                        "description": "A young woman, 5'5\" tall, with a slender build. She has shoulder-length, wavy brown hair, fair skin, and bright, expressive eyes. She wears a simple, knee-length, dark gray A-line skirt, a white short sleeve shirt with a subtle floral pattern, black ankle boots, and no accessories.  She carries a small, black tote bag. Her expression is thoughtful, and slightly concerned. "
-                    }
-                ],
-                "sceneNumber": "2",
-                "description": "Alice is seated on a park bench looking towards the trees ahead.  A park bench and 3 trees that look identical can be seen in the background.  The scene is set during the daytime, the sky is clear, mostly sunny, and no shadows are noticeable, creating a calm ambiance. "
-            },
-            {
-                "description": "Alice is standing next to a lamp post at the corner of a street. A few people are walking around in the background without any detail. The scene takes place during daytime under clear and mostly sunny weather and an overall neutral, unnoticeable mood and lighting. ",
-                "objects": [
-                    {
-                        "description": "A tall, slender, gray metal lamppost, typical of city streets, situated to one side of Alice at a corner of a street. No significant features are needed except that the post should be tall and upright., nothing is shown in detail, such as wiring or attachments.",
-                        "name": "Lamppost"
-                    },
-                    {
-                        "name": "Tote bag",
-                        "description": "A small, black, canvas tote bag with a short shoulder strap. It's fairly new and clean. She is carrying this over her shoulder."
-                    }
-                ],
-                "characters": [
-                    {
-                        "description": "A young woman, 5'5\" tall, with a slender build. She has shoulder-length, wavy brown hair, fair skin, and bright, expressive eyes. She wears a simple, knee-length, dark gray A-line skirt, a white short sleeve shirt with a subtle floral pattern, black ankle boots, and no accessories. She carries a small, black tote bag. She's looking down, pensively. ",
-                        "name": "Alice"
-                    }
-                ],
-                "sceneNumber": "3"
-            },
-            {
-                "description": "Alice is observing a flower and looks relaxed while facing downwards. The flower, a single daisy with simple line details, rests beside her left foot at a quiet garden setting that's simple. Daylight setting; calm weather, with mostly bright sunlight without harsh shadows; The general mood is tranquil and serene, slightly peaceful. ",
-                "sceneNumber": "4",
-                "objects": [
-                    {
-                        "description": "A single daisy with white petals and a yellow center, drawn simply. No details of leaves or stems. The focus should be a single simple-line-drawn flower. It is shown as very minimalist with no more additional description that what has been described already.",
-                        "name": "Daisy"
-                    },
-                    {
-                        "name": "Tote bag",
-                        "description": "A small, black, canvas tote bag with a short shoulder strap. It's fairly new and clean. She is holding this in her left hand."
-                    }
-                ],
-                "characters": [
-                    {
-                        "description": "A young woman, 5'5\" tall, with a slender build. She has shoulder-length, wavy brown hair, fair skin, and bright, expressive eyes. She wears a simple, knee-length, dark gray A-line skirt, a white short sleeve shirt with a subtle floral pattern, black ankle boots, and no accessories. She carries a small, black tote bag.  She has a thoughtful expression, looking toward a flower that appears in the foreground.",
-                        "name": "Alice"
-                    }
-                ]
-            }
-        ]
-    }
-]
+{
+    "storyboardType": "black and white",
+    "sceneNumber": "1",
+    "prompt": "two little boys sitting on the couch playing vidiogames",
+    "status": "inProgress",
+    "artStyle": "line drawn",
+    "scenes": [
+        {
+            "scenes": [
+                {
+                    "sceneNumber": "1",
+                    "description": "Two young boys, Alex and Ben, sit on a worn-out couch, deeply engrossed in a video game.  The couch is a light beige with faded fabric; visible wear and tear on cushions are obvious. Sunlight streams into the room from a nearby window; a clear sky and bright, sharp light outside contrast with softer illumination indoors. The scene's tone is calm, relaxed and comfortable; indicative of an intimate family atmosphere.  ",
+                    "objects": [
+                        {
+                            "name": "Couch",
+                            "description": "Name: Couch, Size: 6 feet long, 3 feet wide, Material: Fabric, Color: Beige (faded), Condition: Worn, Placement: Center of the room, cushions somewhat sunken., Visual details that must remain consistent: Its faded color and visible wear and tear"
+                        },
+                        {
+                            "description": "Name: Video game controller, Size: 6 inches long, 3 inches wide, Material: Plastic, Color: Black and grey, Condition: Intact, Placement: Alex holds one; Ben the other, both gripped firmly in excited, focused hands. Visual details that must remain consistent: Buttons and joystick locations",
+                            "name": "Video Game Controller"
+                        },
+                        {
+                            "name": "Video Game Console",
+                            "description": "Name: Video Game Console, Size: 12 inches by 10 inches, Material: Plastic, Color: Black with a logo and some led lighting indicators, Condition: Good, Placement: on the floor under the couch, next to a power cable"
+                        }
+                    ],
+                    "characters": [
+                        {
+                            "name": "Alex",
+                            "description": "Name: Alex, Height: 3.5 feet, Build: Slender, Hairstyle: Short, spiky, Hair color: Brown, Skin tone: Light, Facial features: Bright eyes, small nose, Clothing:  White t-shirt with a small cartoon print, blue shorts, white socks with blue stripes, and blue sneakers., Accessories or distinguishing details: None, Facial expressions and emotions: Focused and happy"
+                        },
+                        {
+                            "name": "Ben",
+                            "description": "Name: Ben, Height: 3 feet, Build: Slightly chubby, Hairstyle: Short, slightly wavy, Hair color: Blond, Skin tone: Fair, Facial features: Round face, big smile, Clothing: Gray t-shirt, dark blue jeans, red socks with white stripes, and black sneakers., Accessories or distinguishing details: None, Facial expressions and emotions: Excited and enthusiastic"
+                        }
+                    ]
+                }
+            ],
+            "style": "line drawn black and white"
+        }
+    ]
+}
