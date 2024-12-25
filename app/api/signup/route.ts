@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 
 	if (results.message == "success") {
 		const session = await createSession({ email: data.email });
-		const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
+		const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
 		response.cookies.set("access_token", session, {
 			httpOnly: true,
 			secure: true,
