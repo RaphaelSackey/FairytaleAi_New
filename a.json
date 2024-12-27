@@ -1,42 +1,21 @@
 {
-    "storyboardType": "black and white",
-    "sceneNumber": "1",
-    "prompt": "two little boys sitting on the couch playing vidiogames",
-    "status": "inProgress",
-    "artStyle": "line drawn",
-    "scenes": [
-        {
-            "scenes": [
-                {
-                    "sceneNumber": "1",
-                    "description": "Two young boys, Alex and Ben, sit on a worn-out couch, deeply engrossed in a video game.  The couch is a light beige with faded fabric; visible wear and tear on cushions are obvious. Sunlight streams into the room from a nearby window; a clear sky and bright, sharp light outside contrast with softer illumination indoors. The scene's tone is calm, relaxed and comfortable; indicative of an intimate family atmosphere.  ",
-                    "objects": [
-                        {
-                            "name": "Couch",
-                            "description": "Name: Couch, Size: 6 feet long, 3 feet wide, Material: Fabric, Color: Beige (faded), Condition: Worn, Placement: Center of the room, cushions somewhat sunken., Visual details that must remain consistent: Its faded color and visible wear and tear"
-                        },
-                        {
-                            "description": "Name: Video game controller, Size: 6 inches long, 3 inches wide, Material: Plastic, Color: Black and grey, Condition: Intact, Placement: Alex holds one; Ben the other, both gripped firmly in excited, focused hands. Visual details that must remain consistent: Buttons and joystick locations",
-                            "name": "Video Game Controller"
-                        },
-                        {
-                            "name": "Video Game Console",
-                            "description": "Name: Video Game Console, Size: 12 inches by 10 inches, Material: Plastic, Color: Black with a logo and some led lighting indicators, Condition: Good, Placement: on the floor under the couch, next to a power cable"
-                        }
-                    ],
-                    "characters": [
-                        {
-                            "name": "Alex",
-                            "description": "Name: Alex, Height: 3.5 feet, Build: Slender, Hairstyle: Short, spiky, Hair color: Brown, Skin tone: Light, Facial features: Bright eyes, small nose, Clothing:  White t-shirt with a small cartoon print, blue shorts, white socks with blue stripes, and blue sneakers., Accessories or distinguishing details: None, Facial expressions and emotions: Focused and happy"
-                        },
-                        {
-                            "name": "Ben",
-                            "description": "Name: Ben, Height: 3 feet, Build: Slightly chubby, Hairstyle: Short, slightly wavy, Hair color: Blond, Skin tone: Fair, Facial features: Round face, big smile, Clothing: Gray t-shirt, dark blue jeans, red socks with white stripes, and black sneakers., Accessories or distinguishing details: None, Facial expressions and emotions: Excited and enthusiastic"
-                        }
-                    ]
-                }
-            ],
-            "style": "line drawn black and white"
-        }
-    ]
+	"scenes": [
+		{
+			"description": "A young girl with bright, curious blue eyes, shoulder-length auburn hair in pigtails, and a freckled nose, wearing a patched denim overalls and bright red sneakers, joyfully tosses a worn, plush yellow tennis ball high into the air for her playful golden retriever puppy with floppy ears. The puppy is mid-leap, tongue lolling out with joyful exertion, paws reaching high for the ball. Digital painting with soft lighting, detailed textures, vibrant palette, realistic proportions and dynamic poses. They are in a bustling city park with vibrant green trees, stone paths, and dappled sunlight filtering through the canopy. Colorful flowerbeds surround the stone path; other people are enjoying the day, blurring in the background in a bokeh effect. There are several other dogs playing happily with their owners off to the side and a weathered wooden park bench sits quietly nearby, providing context and creating a relaxing vibe. A partially eaten bag of dog biscuits rests next to the girl's feet.",
+			"sceneNumber": "1"
+		},
+		{
+			"description": "Close-up on the girl's face as she laughs uproariously, her auburn pigtails bouncing. Her blue eyes are sparkling with glee and happiness; the happiness is palpable in her entire being. Her face is lit with the warm glow of late afternoon sun, accentuating the freckles across her nose and cheeks. Digital painting, smooth line art, warm color palette, realistic facial expressions, expressive detail, cinematic lighting. She's still in the park setting, surrounded by similar park elements—green trees, flowers, distant pedestrians—creating the context without losing the emotional close-up on the girl’s delighted face. This setting adds depth and allows for some environmental context.",
+			"sceneNumber": "2"
+		},
+		{
+			"description": "The girl and her puppy are now running across the park, their images captured in mid-stride, full of kinetic energy.  The girl is a blur of motion, auburn pigtails flowing behind her; the dog a flurry of golden fur. The tennis ball is between them; neither appears to see it yet. This is digital painting style with impressionistic movement rendering, utilizing blur and motion lines to show action. Color palette emphasizes movement and warmth. It's a high-energy action shot that depicts youthful spontaneity against a slightly blurred backdrop of greens and browns representing the foliage and pathway. There are small hints of other people and objects visible within the bokeh blur of movement—creating perspective and emphasizing action.",
+			"sceneNumber": "3"
+		},
+		{
+			"description": "The girl, now calm and slightly breathless, sits on the bench in the park, petting her happy dog who lays quietly beside her, now chewing gently on the worn tennis ball. She has the calm smile of contented exhaustion after great physical activity. The warm evening light casts long shadows across the park as twilight arrives. This depicts a detailed rendering style with realistic details of fur and fabric textures using digital painting techniques; soft shadows, peaceful ambiance, rich colors. The girl is sitting, embracing her companion as the day gently transforms to dusk. We now have a very focused framing of both human and pet. This quiet moment of reflection will conclude the storytelling sequence.",
+			"sceneNumber": "4"
+		}
+	],
+	"style": "Digital painting colored"
 }

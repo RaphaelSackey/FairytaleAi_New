@@ -23,7 +23,9 @@ export async function POST(
 	if (hasPermission) {
 
 		const urls = await Promise.all(data[0].scenes.map(async (scene: any) => {
-		    const imageUrl = await generateImage(scene, data[0].style) as string
+			console.log(scene.description)
+			console.log(' ')
+		    const imageUrl = await generateImage(scene.description) as string
 		    const downloadableUrl = await insertImageIntoDatabase (imageUrl)
 		    return downloadableUrl
 
