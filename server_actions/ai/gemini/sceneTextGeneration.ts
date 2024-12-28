@@ -39,6 +39,8 @@ export default async function generateSceneText(
 
         6. writing style:
             - make sure the wording of the description does not contain too violent words or anything that will make the image generation model(DALL-E 3) refuse the request to generate the image.
+        7. speech bubbles:
+            - if there are any conversations for a scene include speech bubbles for the characters.
 
         "${prompt}"
 

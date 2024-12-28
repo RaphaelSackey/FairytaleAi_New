@@ -112,7 +112,7 @@ export default function StoryForm({
 						<option value='Digital painting'>Digital painting</option>
 						<option value='Cartoon'>Cartoon</option>
 						<option value='Realistic'>Realistic</option>
-						<option value='Abstract'>Abstract</option>
+						<option value='Anime Style'>Anime Style</option>
 					</select>
 					{mounted && (
 						<Image

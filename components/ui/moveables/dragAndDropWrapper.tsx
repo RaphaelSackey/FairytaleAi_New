@@ -9,6 +9,8 @@ import { dataType as sceneDataType } from "@/client_actions/getStoryboardProgres
 import Image from "next/image";
 import generateCardImages from "@/client_actions/generateCardImages";
 import { getProjectImages } from "@/client_actions/getProjectImages";
+import { useLogInStatus } from "@/contexts/loggedInStatusContext";
+import checkSignIn from "@/client_actions/utils/checkSignIn";
 
 type requestStateType = "complete" | "incomplete" | "error";
 
@@ -20,6 +22,16 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
     const [cardData, setCardData] = useState<sceneDataType | null>(null);
     const [sortedScenes, setSortedScenes] = useState<any[]>([]);
     const [imageUrls, setImageUrls] = useState<Array<{sceneNumber: Number, url: string}>>([]);
+
+        const { loggedInStatus, setLoggedInStatus } = useLogInStatus();
+    
+        useEffect(() => {
+            async function run() {
+                const alreadySignedIn = await checkSignIn();
+                setLoggedInStatus(alreadySignedIn.message === "logged in");
+            }
+            run();
+        }, []);
 
     useEffect(() => {
         if (cardData?.scenes?.[0]?.scenes) {
@@ -56,17 +68,42 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
         doIt()
     }, [])
     
+    const handleSaveEdit = (description: string, id: number) => {
+        setCardData(prev => {
+            if (!prev || !prev.scenes || !prev.scenes[0] || !prev.scenes[0].scenes) return prev;
+    
+            const updatedScenes = prev.scenes[0].scenes.map(scene => {
+                if (Number(scene.sceneNumber) === id) {
+                    return {
+                        ...scene,
+                        description: description,
+                    };
+                }
+                return scene;
+            });
+
+            return {
+                ...prev,
+                scenes: [
+                    {
+                        ...prev.scenes[0],
+                        scenes: updatedScenes,
+                    },
+                ],
+            };
+        });
+    }    
+    
     const cards = sortedScenes.map((item) => (
         <SceneCard
             id={Number(item.sceneNumber)}
             key={Number(item.sceneNumber)}
             link={imageUrls.length === sortedScenes.length ? (imageUrls.find(urlObj => urlObj.sceneNumber === Number(item.sceneNumber) ))?.url : undefined}
             description={item.description}
-            dialog={undefined}
-            action={undefined}
+            handleSaveEdit = {handleSaveEdit}
         />
     ));
-
+    
     async function generateImages() {
         setRequestState("incomplete");
         const response = await generateCardImages(cardData?.scenes, id)
