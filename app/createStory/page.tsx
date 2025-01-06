@@ -3,14 +3,20 @@ import { useEffect, useState } from "react";
 import checkSignIn from "@/client_actions/utils/checkSignIn";
 import { NormalAlert } from "@/components/ui/alert/normalAlert";
 import AddStoryCard from "@/components/ui/addStory/addStoryCard";
-import StoryCard from "@/components/ui/storyCard/storyCard.jsx";
+import StoryCard from "@/components/ui/storyCard/storyCard";
 import StoryForm from "@/components/ui/sotryForm/storyForm";
 import { useLogInStatus } from "@/contexts/loggedInStatusContext";
+import { getUserData } from "@/client_actions/getUserData";
+import { getProjectImages } from "@/client_actions/getProjectImages";
+
 
 export default function CreateStory() {
 	const [showStoryForm, setShowStoryForm] = useState(false);
 	const { loggedInStatus, setLoggedInStatus } = useLogInStatus();
+	const [storyboards, setStoryboards] = useState<Array<string>>([])
 
+	const cads = storyboards.map(item => <StoryCard key={item[1]} img={item[1]} id ={item[0]}/>);
+	
 	useEffect(() => {
 		async function run() {
 			const alreadySignedIn = await checkSignIn();
@@ -18,6 +24,27 @@ export default function CreateStory() {
 		}
 		run();
 	}, []);
+
+	useEffect(()=> {
+		const doIt = async () => {
+			const userData = await getUserData()
+			const info: Array<string> = await Promise.all( userData.projects.slice(-3).map(async (item:string) => {
+				const images = await getProjectImages(item)
+				if (images.hasImages){
+					return [item, images.images[0]]
+				}
+				else{
+					return [item, '/assets/image.webp']
+				}
+				
+			}))
+			setStoryboards(info)
+		}
+		
+		if (loggedInStatus){
+			doIt()
+		}
+	}, [loggedInStatus])
 
 	function handleShowStoryForm() {
 		setShowStoryForm((prev) => !prev);
@@ -45,12 +72,10 @@ export default function CreateStory() {
 					</section>
 
 					<section className='bottom flex flex-col gap-4 items-center'>
-						<div>STORYBOARDS 1</div>
+						{/* <div>STORYBOARDS 1</div> */}
 
 						<div className='stories grid grid-rows-* grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-3 items-center w-[95%] lg:w-[90%]'>
-							<StoryCard />
-							<StoryCard />
-							<StoryCard />
+							{cads}
 
 							<AddStoryCard showStoryForm={handleShowStoryForm} />
 						</div>

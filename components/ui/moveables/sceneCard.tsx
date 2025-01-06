@@ -9,11 +9,13 @@ export default function SceneCard({
 	link,
 	description,
 	handleSaveEdit,
+	downloadMode,
 }: {
 	id: number;
 	link: string | undefined;
 	description: string | undefined;
 	handleSaveEdit: (description: string, id: number) => void;
+	downloadMode: boolean
 }) {
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable({ id });
@@ -72,7 +74,7 @@ export default function SceneCard({
 				</div>}
 				
 				{/* button section */}
-				<div className='flex gap-2 h-auto pt-2'>
+				{!downloadMode && <div className='flex gap-2 h-auto pt-2'>
 					{link ? (
 						<>
 							<button className='bg-gradient-to-r from-green-400 to-green-600 px-2 py-1 rounded hover:from-green-500 hover:to-green-700 transition-colors duration-300'>
@@ -106,7 +108,7 @@ export default function SceneCard({
 							Save Edits
 						</button>
 					)}
-				</div>
+				</div>}
 			</div>
 		</div>
 	);

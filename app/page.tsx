@@ -40,7 +40,7 @@ export default function Home() {
 		<div>
 			<div className='container mx-auto'>
 				<LargeSectionImgR
-					img='/images/test/1.webp'
+					img='/images/test/1.png'
 					title='Fairytale AI'
 					body='Your AI Powered Storyboard Generator'
 				/>
