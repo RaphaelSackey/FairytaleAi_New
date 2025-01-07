@@ -11,7 +11,7 @@ import {
 	arrayUnion,
 	doc,
 	updateDoc,
-	getDoc
+	getDoc,
 } from "firebase/firestore";
 
 export async function addUser(data: dataType) {
@@ -20,7 +20,7 @@ export async function addUser(data: dataType) {
 		projects: [],
 		password: await hashPassword(data.password),
 	};
-	const usersColReference = collection(db, "Users");
+	const usersColReference = collection(db, "users");
 	const q = query(usersColReference, where("email", "==", data.email));
 
 	const alreadyExits = await getDocs(q);
@@ -37,8 +37,16 @@ export async function addUser(data: dataType) {
 	}
 }
 
-export async function getUser(data: dataType) {
-	const usersColReference = collection(db, "Users");
+export async function getUser(
+	data:
+		| dataType
+		| {
+				email: string;
+				iat: number;
+				exp: number;
+		  }
+) {
+	const usersColReference = collection(db, "users");
 	const q = query(usersColReference, where("email", "==", data.email));
 
 	const info = await getDocs(q);
@@ -56,7 +64,7 @@ export async function createProject(info: any) {
 		scenes: [],
 		status: "inProgress",
 	};
-	const ProjectColReference = collection(db, "Projects");
+	const ProjectColReference = collection(db, "projects");
 	const projectId = await addDoc(ProjectColReference, data);
 
 	return projectId.id;
@@ -93,7 +101,7 @@ export async function checkUserOwnsProject(
 	email: string | unknown,
 	id: string
 ) {
-	const usersColReference = collection(db, "Users");
+	const usersColReference = collection(db, "users");
 	const q = query(usersColReference, where("email", "==", email));
 
 	const info = await getDocs(q);
@@ -105,7 +113,7 @@ export async function addNewUserProject(
 	userId: string | unknown,
 	projectId: string
 ) {
-	const usersColReference = collection(db, "Users");
+	const usersColReference = collection(db, "users");
 	const q = query(usersColReference, where("email", "==", userId));
 	const info = await getDocs(q);
 	const userDocRef = doc(usersColReference, info.docs[0].id);
@@ -116,33 +124,33 @@ export async function addNewUserProject(
 }
 
 export async function addProjectSceneContents(content: {}, projectId: string) {
-	const usersColReference = collection(db, "Projects")
-	const userDocRef = doc(usersColReference, projectId)
+	const usersColReference = collection(db, "projects");
+	const userDocRef = doc(usersColReference, projectId);
 
 	await updateDoc(userDocRef, {
 		scenes: arrayUnion(content),
 	});
-
 }
 
+export async function getProjectSceneInfo(projectId: string) {
+	const usersColReference = collection(db, "projects");
+	const userDocRef = doc(usersColReference, projectId);
 
-export async function getProjectSceneInfo(projectId: string){
-	const usersColReference = collection(db, "Projects")
-	const userDocRef = doc(usersColReference, projectId)
+	const data = await getDoc(userDocRef);
 
-	const data = await getDoc(userDocRef)
-
-	return data.data()
+	return data.data();
 }
 
-
-export async function addImageLinksToUserProject(links: Array<string>, projectId: string){
-    const usersColReference = collection(db, "imageLinks")
-	await addDoc(usersColReference, {projectId: projectId, imageUrls: links } )
+export async function addImageLinksToUserProject(
+	links: Array<string>,
+	projectId: string
+) {
+	const usersColReference = collection(db, "imageLinks");
+	await addDoc(usersColReference, { projectId: projectId, imageUrls: links });
 }
 
-export async function getProjectImageLinks(projectId: string){
-	const usersColReference = collection(db, "imageLinks")
+export async function getProjectImageLinks(projectId: string) {
+	const usersColReference = collection(db, "imageLinks");
 	const q = query(usersColReference, where("projectId", "==", projectId));
 	const info = await getDocs(q);
 

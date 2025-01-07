@@ -2,7 +2,9 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { app } from "../firebaseSetup";
 
 export async function insertImageIntoDatabase(url: string){
-    const storage = getStorage(app, 'gs://fairytaleai-caa77.firebasestorage.app')
+    const storage = getStorage(app, 'gs://fairytaleai-a8f2a.firebasestorage.app')
+    
+    if (!url) return ''
     
     const imageResponse = await fetch(url)
     const imageBlob = await imageResponse.blob()

@@ -7,10 +7,10 @@ import { redirect } from "next/navigation";
 import generateStory from "@/client_actions/generateStory";
 
 type storyPromptType = {
-	storyboardType: "black and white";
+	storyboardType: "black and white" | "colored";
 	sceneNumber: number;
 	prompt: string;
-	artStyle: "line drawn";
+	artStyle: "line drawn" | "Digital painting" | "Cartoon" | "Realistic" | "Abstract";
 };
 
 export default function StoryForm({
@@ -77,7 +77,7 @@ export default function StoryForm({
 						className='rounded p-3 appearance-none w-full'>
 						<option value=''>Select a type</option>
 						<option value='black and white'>black and white</option>
-						<option value='comedy'>Comedy</option>
+						<option value='colored'>colored</option>
 					</select>
 					{mounted && (
 						<Image
@@ -109,7 +109,10 @@ export default function StoryForm({
 						required>
 						<option value=''>Select Art Style</option>
 						<option value='line drawn'>line drawn</option>
-						<option value='comedy'>Realistic</option>
+						<option value='Digital painting'>Digital painting</option>
+						<option value='Cartoon'>Cartoon</option>
+						<option value='Realistic'>Realistic</option>
+						<option value='Anime Style'>Anime Style</option>
 					</select>
 					{mounted && (
 						<Image
