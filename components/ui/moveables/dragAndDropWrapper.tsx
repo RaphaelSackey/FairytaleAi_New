@@ -269,7 +269,7 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
 				for each scene. Once you’re satisfied, download your storyboard
 				as an image.
 			</p> : <p className='text-sm md:text-base text-gray-600 max-w-2xl text-center mb-6 min-w-full'>
-			Edit scene descriptions if needed to further customize your story, then generate images for each scene use AI
+			Edit scene descriptions if needed to further customize your story, then generate images for each scene using AI
 				</p>}
 			<DndContext onDragEnd={handleDragEnd}>
 				<div className='flex justify-end w-full mb-5 gap-2'>
