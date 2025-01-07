@@ -8,14 +8,15 @@ import StoryForm from "@/components/ui/sotryForm/storyForm";
 import { useLogInStatus } from "@/contexts/loggedInStatusContext";
 import { getUserData } from "@/client_actions/getUserData";
 import { getProjectImages } from "@/client_actions/getProjectImages";
+import { getProjectData } from "@/client_actions/getPeojectData";
 
 
 export default function CreateStory() {
 	const [showStoryForm, setShowStoryForm] = useState(false);
 	const { loggedInStatus, setLoggedInStatus } = useLogInStatus();
-	const [storyboards, setStoryboards] = useState<Array<string>>([])
+	const [storyboards, setStoryboards] = useState<[string, string, any] | []>([])
 
-	const cads = storyboards.map(item => <StoryCard key={item[1]} img={item[1]} id ={item[0]}/>);
+	const cads = storyboards.map((item,index) => <StoryCard key={index} img={item[1]} id ={item[0]} num={item[2].scenes[0].scenes.length} date={item[2].dateCreated}/>);
 	
 	useEffect(() => {
 		async function run() {
@@ -28,16 +29,17 @@ export default function CreateStory() {
 	useEffect(()=> {
 		const doIt = async () => {
 			const userData = await getUserData()
-			const info: Array<string> = await Promise.all( userData.projects.slice(-3).map(async (item:string) => {
+			const info: [string, string, any] = await Promise.all( userData.projects.slice(-3).map(async (item:string) => {
 				const images = await getProjectImages(item)
+				const projData = await getProjectData(item)
 				if (images.hasImages){
-					return [item, images.images[0]]
+					return [item, images.images[0], projData]
 				}
 				else{
-					return [item, '/assets/image.webp']
+					return [item, '/assets/image.webp', projData]
 				}
 				
-			}))
+			})) as [string, string, any]
 			setStoryboards(info)
 		}
 		
@@ -65,7 +67,7 @@ export default function CreateStory() {
 						</div>
 						<div className='font-suseMedium text-md opacity-70'>
 							Your dream pre-production workflow starts here.
-							Create your first storyboard and experience how
+							Create storyboards and experience how
 							teams like yours cut their pre-production time in
 							half.
 						</div>

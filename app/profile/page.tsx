@@ -14,20 +14,24 @@ export default function Profile() {
 	const [selectedTab, setSelectedTab] = useState<"Storyboards" | "queries">(
 		"Storyboards"
 	);
+	const [usersName, setUsersName] = useState('')
 	const [sidenavTabData, setSidenavTabData] = useState<{
-		Storyboards: Array<string>;
-		queries: Array<string>;
+		Storyboards: [string, string, any] | any[];
+		queries: [string, string, any] |any[];
 	}>({ Storyboards: [], queries: [] });
 
 	function generateCards() {
 		return sidenavTabData[`${selectedTab}`].map((item, index) => {
 			
 			if (selectedTab === "Storyboards") {
+				console.log(item)
 				return (
 					<StoryCard
 						key={item[0]}
 						img={item[1]}
 						id={item[0]}
+						date = {item[2].dateCreated}
+						num={item[2].scenes[0].scenes.length}
 					/>
 				);
 			} else if (selectedTab === "queries") {
@@ -68,7 +72,9 @@ export default function Profile() {
 					}
 				})
 			) as [string, string, any];
-			setSidenavTabData((prev) => ({
+			setUsersName(`${userData.firstName} ${userData.lastName}`)
+			console.log(userData)
+			setSidenavTabData(({
 				queries: info.map((item) => item[2].prompt),
 				Storyboards: info.filter((item) => item[1] !== ""),
 			}));
@@ -100,7 +106,7 @@ export default function Profile() {
 								className='dark:invert'
 							/>
 						</div>
-						<div className='w-full text-center mt-2'>Luke Grey</div>
+						<div className='w-full text-center mt-2'>{usersName}</div>
 					</div>
 					<div
 						id='Storyboards'
@@ -121,7 +127,7 @@ export default function Profile() {
 						Queries
 					</div>
 				</div>
-				<div className='container h-[78vh] overflow-auto grid lg:grid-cols-4 gap-2 md:grid-cols-3 grid-cols-2 mx-5 border border-border p-1 rounded-lg'>
+				<div className='container h-[78vh] overflow-auto grid lg:grid-cols-4 gap-3 md:grid-cols-3 grid-cols-2 mx-5 border border-border p-1 rounded-lg'>
 					{cards}
 				</div>
 			</div>

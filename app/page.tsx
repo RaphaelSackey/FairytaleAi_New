@@ -8,14 +8,6 @@ import Footer from "@/components/ui/footer/footer";
 import checkSignIn from "@/client_actions/utils/checkSignIn";
 
 export default function Home() {
-	// check if user is already logged in
-	// useLayoutEffect(() => {
-	// 	async function run(){
-	// 		const alreadySignedIn = await checkSignIn()
-	// 		console.log(alreadySignedIn )
-	// 	}
-	// 	run()
-	// })
 
 	const entries = [
 		{

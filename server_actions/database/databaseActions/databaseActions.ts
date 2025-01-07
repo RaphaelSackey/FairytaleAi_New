@@ -63,6 +63,11 @@ export async function createProject(info: any) {
 		...info,
 		scenes: [],
 		status: "inProgress",
+		dateCreated: new Date().toLocaleDateString("en-US", {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		}),
 	};
 	const ProjectColReference = collection(db, "projects");
 	const projectId = await addDoc(ProjectColReference, data);

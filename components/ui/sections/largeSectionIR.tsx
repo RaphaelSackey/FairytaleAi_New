@@ -15,15 +15,15 @@ export default function LargeSectionImgR({
 	button,
 }: sectionLayout) {
 	return (
-		<div className='section-wrapper grid grid-rows-2 lg:grid-rows-1 lg:grid-cols-2 w-full h-fit lg:h-[80%] lg:min-h-[35rem] lg:max-h-[80%] lg:gap-3 mb-8'>
-			<div className='content flex flex-col h-[35rem] min-h-[35rem] max-h-[35rem] lg:min-h-full lg:max-h-full lg:mr-40 lg:pt-14'>
-				<h1 className='text-5xl font-suseMedium'>
+		<div className='section-wrapper lg:grid lg:grid-rows-1 lg:grid-cols-2 w-full h-fit lg:h-[80%] lg:min-h-[35rem] lg:max-h-[80%] lg:gap-3 mb-8 flex flex-col justify-center items-center'>
+			<div className='textSection content mb-7 max-h-[35rem] lg:min-h-full lg:max-h-full lg:mr-40 lg:pt-36 '>
+				<h1 className='text-5xl font-suseMedium text-center lg:text-left'>
 					Discover the Future of Storyboarding with FairytaleAI
 				</h1>
-				<h3 className='font-suseMedium opacity-80 py-5'>
+				<h3 className='font-suseMedium opacity-80 py-5 text-center lg:text-left'>
 					Join millions of users who have harnessed the power of FairytaleAI's Storyboard Generator. Be part of the creative revolution and elevate your storytelling to new heights!
 				</h3>
-				<h3 className='font-suseMedium opacity-80 py-3'>
+				<h3 className='font-suseMedium opacity-80 py-3 text-center lg:text-left'>
 					Unlock the potential of collaborative storytelling with FairytaleAI's advanced AI tools. Start today and transform your creative process into an extraordinary journey!
 				</h3>
 				{button && <Navbutton href='/createStory'>Get Started</Navbutton>}
