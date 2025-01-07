@@ -260,42 +260,56 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
 	}
 
 	return mounted ? (
-		<DndContext onDragEnd={handleDragEnd}>
-			<div className='flex justify-end w-full mb-5 gap-2'>
-				{imageUrls.length === 0 && (
+		<div className="w-full">
+			<h1 className='text-2xl md:text-4xl font-bold mb-4 min-w-full text-center'>
+				Your Storyboard
+			</h1>
+			{imageUrls.length?<p className='text-sm md:text-base text-gray-600 max-w-2xl text-center mb-6 min-w-full'>
+				Rearrange scenes by dragging and dropping, or re-generate images
+				for each scene. Once you’re satisfied, download your storyboard
+				as an image.
+			</p> : <p className='text-sm md:text-base text-gray-600 max-w-2xl text-center mb-6 min-w-full'>
+			Edit scene descriptions if needed to further customize your story, then generate images for each scene use AI
+				</p>}
+			<DndContext onDragEnd={handleDragEnd}>
+				<div className='flex justify-end w-full mb-5 gap-2'>
+					{imageUrls.length === 0 && (
+						<button
+							className='w-fit h-11 rounded-lg bg-gradient-to-r from-orange-500  to-varCallToAction flex items-center justify-center px-2 hover:scale-105 ease-in-out transition-transform '
+							onClick={generateImages}>
+							Generate Images{" "}
+							<Image
+								src='/assets/ai.png'
+								height={40}
+								width={40}
+								alt='ai'
+							/>
+						</button>
+					)}
 					<button
-						className='w-fit h-11 rounded-lg bg-gradient-to-r from-orange-500  to-varCallToAction flex items-center justify-center px-2 hover:scale-105 ease-in-out transition-transform '
-						onClick={generateImages}>
-						Generate Images{" "}
-						<Image
-							src='/assets/ai.png'
-							height={40}
-							width={40}
-							alt='ai'
-						/>
+						className='w-36 h-11 border rounded-lg'
+						onClick={() => handleDownload()}>
+						Download
 					</button>
-				)}
-				<button
-					className='w-36 h-11 border rounded-lg'
-					onClick={() => handleDownload()}>
-					Download
-				</button>
-			</div>
-			{requestState === "incomplete" && (
-				<div className='w-full mb-5'>
-					<Progress value={progress} />
 				</div>
-			)}
-			<div
-				className={
-					requestState === "complete" || requestState === "error"
-						? "grid grid-cols-1 px-6 w-5/6 md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-						: "grid grid-cols-1 px-6 w-5/6 md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse"
-				}
-				ref={captureRef}>
-				<SortableContext items={sortableItems}>{cards}</SortableContext>
-			</div>
-		</DndContext>
+				{requestState === "incomplete" && (
+					<div className='w-full mb-5'>
+						<Progress value={progress} />
+					</div>
+				)}
+				<div
+					className={
+						requestState === "complete" || requestState === "error"
+							? "grid grid-cols-1 px-6 w-full md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+							: "grid grid-cols-1 px-6 w-full md:w-full md:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse"
+					}
+					ref={captureRef}>
+					<SortableContext items={sortableItems}>
+						{cards}
+					</SortableContext>
+				</div>
+			</DndContext>
+		</div>
 	) : (
 		<div></div>
 	);
