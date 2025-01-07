@@ -30,9 +30,8 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
 	const [downloadMode, setDownloadMode] = useState(false);
 	const captureRef = useRef(null);
 
+	console.log("rerendering");
 
-	console.log('rerendering')
-	
 	useEffect(() => {
 		async function run() {
 			const alreadySignedIn = await checkSignIn();
@@ -52,7 +51,6 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
 	}, [cardData]);
 
 	useEffect(() => {
-		// Update sortedScenes based on sortableItems' new order
 		if (cardData?.scenes?.[0]?.scenes) {
 			const updatedScenes = sortableItems.map((itemId) =>
 				cardData.scenes[0].scenes.find(
@@ -171,6 +169,36 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
 	useEffect(() => setMounted(true), []);
 
 	useEffect(() => {
+		let intervalId: NodeJS.Timeout;
+		let currentProgress = 0;
+
+		const simulateProgress = () => {
+			if (requestState === "incomplete") {
+				const increment = Math.random() * 5 + 1; // Random increment between 1% and 5%
+				currentProgress = Math.min(currentProgress + increment, 99); // Cap at 99% before completion
+				setProgress(currentProgress);
+
+				if (currentProgress >= 25 && currentProgress < 50) {
+					console.log("Generating scene outlines...");
+				} else if (currentProgress >= 50 && currentProgress < 75) {
+					console.log("Adding visual elements...");
+				} else if (currentProgress >= 75 && currentProgress < 99) {
+					console.log("Finalizing scenes...");
+				}
+			}
+		};
+
+		if (requestState === "incomplete") {
+			intervalId = setInterval(
+				simulateProgress,
+				Math.random() * 1000 + 500
+			); // Random interval between 500ms and 1500ms
+		}
+
+		return () => clearInterval(intervalId);
+	}, [requestState]);
+
+	useEffect(() => {
 		const intervalId = setInterval(async () => {
 			if (requestState === "incomplete") {
 				try {
@@ -179,15 +207,13 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
 					if (data.status === "complete") {
 						clearInterval(intervalId);
 						setRequestState("complete");
-						setProgress(data.numProg);
+						setProgress(100); // Set progress to 100% on completion
 						console.log("Data fetched successfully:", data.data);
 						setCardData(data.data);
 					} else if (data.status === "error") {
 						console.error("There was an error fetching data.");
 						setRequestState("error");
 						clearInterval(intervalId);
-					} else if (data.status === "incomplete") {
-						setProgress(data.numProg);
 					}
 				} catch (error) {
 					console.error("Error during data fetch:", error);
@@ -200,14 +226,11 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
 		return () => clearInterval(intervalId);
 	}, []);
 
-	// download image
 	useEffect(() => {
 		async function doIt(captureRef: React.RefObject<HTMLDivElement>) {
-			// Make sure it's running in the browser
 			if (typeof window === "undefined") return;
 
 			try {
-				// Render the referenced <div> into a canvas
 				const canvas = await html2canvas(
 					captureRef.current as HTMLElement,
 					{
@@ -217,10 +240,7 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
 					}
 				);
 
-				// Convert the canvas to a Data URL (PNG)
 				const dataURL = canvas.toDataURL("image/png");
-
-				// Create a temporary link to trigger download
 				const link = document.createElement("a");
 				link.href = dataURL;
 				link.download = "storyboard.png";
@@ -234,12 +254,11 @@ export default function DragAndDropWrapper({ id }: { id: string }) {
 		}
 		setDownloadMode(false);
 	}, [downloadMode]);
+
 	async function handleDownload() {
-		// Make sure it's running in the browser
 		setDownloadMode(true);
 	}
 
-	// download image
 	return mounted ? (
 		<DndContext onDragEnd={handleDragEnd}>
 			<div className='flex justify-end w-full mb-5 gap-2'>

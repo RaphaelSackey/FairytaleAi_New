@@ -22,5 +22,5 @@ export async function GET() {
 	const payload = (await decrypt(cook.value)) as PayloadType | null;
     const useData = await getUser(payload as PayloadType)
     console.log(useData)
-	return NextResponse.json({firstName:useData?.firstName, lastName:useData?.lastNameName, projects:useData?.projects});
+	return NextResponse.json({firstName:useData?.firstName, lastName:useData?.lastName, projects:useData?.projects});
 }
