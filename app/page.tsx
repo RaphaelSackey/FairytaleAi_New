@@ -11,22 +11,22 @@ export default function Home() {
 
 	const entries = [
 		{
-			title: "Write a prompt",
+			title: "Craft Your Prompt and Personalize Your Storyboard",
 			content: <Video src='/videos/1.mp4' />,
 		},
 		{
-			title: "Make edits if necessary",
+			title: "Auto-Generate Scenes and Make Easy Edits",
 			content: <Video src='/videos/2.mp4' />,
 		},
 		{
-			title: "Generate storyboard",
+			title: "Bring Your Story to Life with Generated Images",
 			content: <Video src='/videos/3.mp4' />,
 		},
 		{
-			title: "Save and download",
+			title: "Save and Download Your Final Storyboard",
 			content: <Video src='/videos/4.mp4' />,
 		},
-	];
+	]
 
 	return (
 		<div>

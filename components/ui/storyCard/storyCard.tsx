@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 export default function StoryCard({img, id, date, num}: {img: string, id: string, date:string, num:number}) {
     return (
-        <div className="border w-full h-full hover:cursor-pointer dark:bg-border rounded-lg">
+        <div className="border w-full h-fit hover:cursor-pointer dark:bg-border rounded-lg">
             <div className="relative w-full aspect-square " onClick={() => redirect(`storyboard/${id}`)}>
                 <Image
                     src={img}
