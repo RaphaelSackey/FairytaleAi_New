@@ -125,18 +125,51 @@ tsconfig.json
 
 ### **getUserData**
 
-- **Location**: `getUserData.ts`
-- This function fetches user data from the server. It is used to retrieve information about the currently signed-in user.
+- **Endpoint**: `/api/getuserdata`
+- **Method**: `GET`
+- **Description**: Fetches user data from the server. It is used to retrieve information about the currently signed-in user.
 
 ### **getProjectImages**
 
-- **Location**: `getProjectImages.ts`
-- This function fetches project images from the server. It is used to retrieve images associated with a project.
+- **Endpoint**: `/api/getprojectimages/[id]`
+- **Method**: `GET`
+- **Description**: Fetches project images from the server. It is used to retrieve images associated with a project.
 
 ### **getProjectData**
 
-- **Location**: `client_actions/getProjectData.ts`
-- This function fetches project data from the server. It is used to retrieve information about a specific project.
+- **Endpoint**: `/api/getprojectdata/[id]`
+- **Method**: `GET`
+- **Description**: Fetches project data from the server. It is used to retrieve information about a specific project.
+
+### **generateStoryboard**
+
+- **Endpoint**: `/api/generatestoryboard`
+- **Method**: `POST`
+- **Description**: Generates a storyboard based on the provided prompt and other parameters.
+
+### **generateCardImages**
+
+- **Endpoint**: `/api/generatecardimages/[id]`
+- **Method**: `POST`
+- **Description**: Generates card images for a project based on the provided data.
+
+### **checkSignedIn**
+
+- **Endpoint**: `/api/checksignedin`
+- **Method**: `GET`
+- **Description**: Checks if the user is signed in by validating the access token.
+
+### **signup**
+
+- **Endpoint**: `/api/signup`
+- **Method**: `POST`
+- **Description**: Registers a new user and creates a session.
+
+### **login**
+
+- **Endpoint**: `/api/login`
+- **Method**: `POST`
+- **Description**: Authenticates a user and creates a session.
 
 ---
 
@@ -192,7 +225,4 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - An interactive Next.js tutorial.
-- [Next.js GitHub Repository](https://github.com/vercel/next.js) - Your 
-
-feedbacks are welcome!
-
+- [Next.js GitHub Repository](https://github.com/vercel/next.js) - Your feedback and contributions are welcome!
