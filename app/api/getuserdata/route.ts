@@ -10,17 +10,29 @@ type PayloadType = {
 };
 
 export async function GET() {
-	const cook = (await cookies()).get("access_token");
+	try {
+		const cook = (await cookies()).get("access_token");
 
-	if (!cook) {
+		if (!cook) {
+			return NextResponse.json(
+				{ error: "No access token found" },
+				{ status: 401 }
+			);
+		}
+
+		const payload = (await decrypt(cook.value)) as PayloadType | null;
+		const useData = await getUser(payload as PayloadType);
+		console.log(useData);
+		return NextResponse.json({
+			firstName: useData?.firstName,
+			lastName: useData?.lastName,
+			projects: useData?.projects,
+		});
+	} catch (err: any) {
+		console.error("Error in /api/getuserdata:", err);
 		return NextResponse.json(
-			{ error: "No access token found" },
-			{ status: 401 }
+			{ message: "error", error: err?.message ?? String(err) },
+			{ status: 500 }
 		);
 	}
-
-	const payload = (await decrypt(cook.value)) as PayloadType | null;
-    const useData = await getUser(payload as PayloadType)
-    console.log(useData)
-	return NextResponse.json({firstName:useData?.firstName, lastName:useData?.lastName, projects:useData?.projects});
 }

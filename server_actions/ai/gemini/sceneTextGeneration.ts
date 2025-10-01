@@ -55,12 +55,26 @@ export default async function generateSceneText(
         Please generate ${sceneNumber} scenes, ensuring every description adheres to the format outlined above. The descriptions will be passed to an image generation AI (DALL-E 3) and must be detailed enough to create consistent outputs across all scenes.
     `;
 
-	const result = await geminiModel.generateContent(fullPrompt);
-    console.log(result.response.text())
+	console.log("i have been called");
+	try {
+		const result = await geminiModel.generateContent(fullPrompt);
+		const text = result.response.text();
+		console.log(text);
 
-	await addProjectSceneContents(
-		JSON.parse(result.response.text()),
-		projectId
-	);
-	await removeFromInProgress(projectId);
+		const parsed = JSON.parse(text);
+
+		await addProjectSceneContents(parsed, projectId);
+		await removeFromInProgress(projectId);
+	} catch (err: any) {
+		console.error("Error in generateSceneText:", err);
+		try {
+			await removeFromInProgress(projectId);
+		} catch (cleanupErr: any) {
+			console.error(
+				"Error removing from inProgress after failure:",
+				cleanupErr
+			);
+		}
+		throw err;
+	}
 }

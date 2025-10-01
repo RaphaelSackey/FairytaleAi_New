@@ -15,25 +15,31 @@ import {
 } from "firebase/firestore";
 
 export async function addUser(data: dataType) {
-	data = {
-		...data,
-		projects: [],
-		password: await hashPassword(data.password),
-	};
-	const usersColReference = collection(db, "users");
-	const q = query(usersColReference, where("email", "==", data.email));
+	try {
+		console.log("im running");
+		data = {
+			...data,
+			projects: [],
+			password: await hashPassword(data.password),
+		};
+		const usersColReference = collection(db, "users");
+		const q = query(usersColReference, where("email", "==", data.email));
 
-	const alreadyExits = await getDocs(q);
+		const alreadyExits = await getDocs(q);
 
-	if (!alreadyExits.empty) {
-		return { message: "user already exists" };
-	} else {
-		const success = await addDoc(usersColReference, data);
-		if (success) {
-			return { message: "success" };
+		if (!alreadyExits.empty) {
+			return { message: "user already exists" };
 		} else {
-			return { message: "something went wrong" };
+			const success = await addDoc(usersColReference, data);
+			if (success) {
+				return { message: "success" };
+			} else {
+				return { message: "something went wrong" };
+			}
 		}
+	} catch (err: any) {
+		console.error("Error in addUser:", err);
+		throw err;
 	}
 }
 
@@ -46,122 +52,188 @@ export async function getUser(
 				exp: number;
 		  }
 ) {
-	const usersColReference = collection(db, "users");
-	const q = query(usersColReference, where("email", "==", data.email));
+	try {
+		const usersColReference = collection(db, "users");
+		const q = query(usersColReference, where("email", "==", data.email));
 
-	const info = await getDocs(q);
+		const info = await getDocs(q);
 
-	if (!info.empty) {
-		return info.docs[0].data();
-	} else {
-		return null;
+		if (!info.empty) {
+			return info.docs[0].data();
+		} else {
+			return null;
+		}
+	} catch (err: any) {
+		console.error("Error in getUser:", err);
+		throw err;
 	}
 }
 
 export async function createProject(info: any) {
-	const data = {
-		...info,
-		scenes: [],
-		status: "inProgress",
-		dateCreated: new Date().toLocaleDateString("en-US", {
-			year: "numeric",
-			month: "long",
-			day: "numeric",
-		}),
-	};
-	const ProjectColReference = collection(db, "projects");
-	const projectId = await addDoc(ProjectColReference, data);
+	try {
+		const data = {
+			...info,
+			scenes: [],
+			status: "inProgress",
+			dateCreated: new Date().toLocaleDateString("en-US", {
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+			}),
+		};
+		const ProjectColReference = collection(db, "projects");
+		const projectId = await addDoc(ProjectColReference, data);
 
-	return projectId.id;
+		return projectId.id;
+	} catch (err: any) {
+		console.error("Error in createProject:", err);
+		throw err;
+	}
 }
 
 export async function addToInProgress(id: string) {
-	const InProgColReference = collection(db, "inProgress");
-	addDoc(InProgColReference, { id });
+	try {
+		const InProgColReference = collection(db, "inProgress");
+		await addDoc(InProgColReference, { id });
+	} catch (err: any) {
+		console.error("Error in addToInProgress:", err);
+		throw err;
+	}
 }
 
 export async function checkInProgress(id: string) {
-	const InProgColReference = collection(db, "inProgress");
-	const q = query(InProgColReference, where("id", "==", id));
-	const isFinished = await getDocs(q);
+	try {
+		const InProgColReference = collection(db, "inProgress");
+		const q = query(InProgColReference, where("id", "==", id));
+		const isFinished = await getDocs(q);
 
-	if (isFinished.empty) {
-		return true;
-	} else {
-		return false;
+		if (isFinished.empty) {
+			return true;
+		} else {
+			return false;
+		}
+	} catch (err: any) {
+		console.error("Error in checkInProgress:", err);
+		throw err;
 	}
 }
 
 export async function removeFromInProgress(id: string) {
-	const InProgColReference = collection(db, "inProgress");
-	const q = query(InProgColReference, where("id", "==", id));
-	const querySnapshot = await getDocs(q);
+	try {
+		const InProgColReference = collection(db, "inProgress");
+		const q = query(InProgColReference, where("id", "==", id));
+		const querySnapshot = await getDocs(q);
 
-	querySnapshot.forEach(async (document) => {
-		await deleteDoc(document.ref);
-	});
+		querySnapshot.forEach(async (document) => {
+			try {
+				await deleteDoc(document.ref);
+			} catch (innerErr: any) {
+				console.error("Error deleting inProgress document:", innerErr);
+			}
+		});
+	} catch (err: any) {
+		console.error("Error in removeFromInProgress:", err);
+		throw err;
+	}
 }
 
 export async function checkUserOwnsProject(
 	email: string | unknown,
 	id: string
 ) {
-	const usersColReference = collection(db, "users");
-	const q = query(usersColReference, where("email", "==", email));
+	try {
+		const usersColReference = collection(db, "users");
+		const q = query(usersColReference, where("email", "==", email));
 
-	const info = await getDocs(q);
-	const { projects } = info.docs[0].data();
-	return projects.includes(id);
+		const info = await getDocs(q);
+		if (info.empty) return false;
+		const { projects } = info.docs[0].data();
+		return projects.includes(id);
+	} catch (err: any) {
+		console.error("Error in checkUserOwnsProject:", err);
+		throw err;
+	}
 }
 
 export async function addNewUserProject(
 	userId: string | unknown,
 	projectId: string
 ) {
-	const usersColReference = collection(db, "users");
-	const q = query(usersColReference, where("email", "==", userId));
-	const info = await getDocs(q);
-	const userDocRef = doc(usersColReference, info.docs[0].id);
+	try {
+		const usersColReference = collection(db, "users");
+		const q = query(usersColReference, where("email", "==", userId));
+		const info = await getDocs(q);
+		if (info.empty) throw new Error("User not found");
+		const userDocRef = doc(usersColReference, info.docs[0].id);
 
-	await updateDoc(userDocRef, {
-		projects: arrayUnion(projectId),
-	});
+		await updateDoc(userDocRef, {
+			projects: arrayUnion(projectId),
+		});
+	} catch (err: any) {
+		console.error("Error in addNewUserProject:", err);
+		throw err;
+	}
 }
 
 export async function addProjectSceneContents(content: {}, projectId: string) {
-	const usersColReference = collection(db, "projects");
-	const userDocRef = doc(usersColReference, projectId);
+	try {
+		const usersColReference = collection(db, "projects");
+		const userDocRef = doc(usersColReference, projectId);
 
-	await updateDoc(userDocRef, {
-		scenes: arrayUnion(content),
-	});
+		await updateDoc(userDocRef, {
+			scenes: arrayUnion(content),
+		});
+	} catch (err: any) {
+		console.error("Error in addProjectSceneContents:", err);
+		throw err;
+	}
 }
 
 export async function getProjectSceneInfo(projectId: string) {
-	const usersColReference = collection(db, "projects");
-	const userDocRef = doc(usersColReference, projectId);
+	try {
+		console.log("i have been called");
+		const usersColReference = collection(db, "projects");
+		const userDocRef = doc(usersColReference, projectId);
 
-	const data = await getDoc(userDocRef);
+		const data = await getDoc(userDocRef);
 
-	return data.data();
+		console.log(data.data());
+		return data.data();
+	} catch (err: any) {
+		console.error("Error in getProjectSceneInfo:", err);
+		throw err;
+	}
 }
 
 export async function addImageLinksToUserProject(
 	links: Array<string>,
 	projectId: string
 ) {
-	const usersColReference = collection(db, "imageLinks");
-	await addDoc(usersColReference, { projectId: projectId, imageUrls: links });
+	try {
+		const usersColReference = collection(db, "imageLinks");
+		await addDoc(usersColReference, {
+			projectId: projectId,
+			imageUrls: links,
+		});
+	} catch (err: any) {
+		console.error("Error in addImageLinksToUserProject:", err);
+		throw err;
+	}
 }
 
 export async function getProjectImageLinks(projectId: string) {
-	const usersColReference = collection(db, "imageLinks");
-	const q = query(usersColReference, where("projectId", "==", projectId));
-	const info = await getDocs(q);
+	try {
+		const usersColReference = collection(db, "imageLinks");
+		const q = query(usersColReference, where("projectId", "==", projectId));
+		const info = await getDocs(q);
 
-	if (!info.empty) {
-		return info.docs[0].data().imageUrls;
-	} else {
-		return null;
+		if (!info.empty) {
+			return info.docs[0].data().imageUrls;
+		} else {
+			return null;
+		}
+	} catch (err: any) {
+		console.error("Error in getProjectImageLinks:", err);
+		throw err;
 	}
 }

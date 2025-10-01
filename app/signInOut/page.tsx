@@ -100,6 +100,7 @@ export default function signInOut() {
 			};
 
 			const response = await CreateAccount(data);
+			
 			if (response.data.message === "success") {
 				redirect("/createStory");
 			} else if (response.data.message === "user already exists") {

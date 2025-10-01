@@ -4,26 +4,25 @@ import { NextResponse } from "next/server";
 // import { SessionPayload } from "@/app/lib/definitions";
 
 const secretKey = process.env.SESSION_SECRET;
+if (!secretKey) {
+	console.error("SESSION_SECRET is not set");
+	throw new Error("SESSION_SECRET environment variable is required");
+}
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function createSession(payload: any) {
-	
-	
-	const session = await new SignJWT(payload)
-		.setProtectedHeader({ alg: "HS256" })
-		.setIssuedAt()
-		.setExpirationTime("15m")
-		.sign(encodedKey);
-	// const response = NextResponse.json({ message: 'success' }); 
-	// response.cookies.set("session", session, {
-	// 	httpOnly: true,
-	// 	secure: true,
-	// 	expires: expiresAt,
-	// 	sameSite: "lax",
-	// 	path: "/",
-	// });
+	try {
+		const session = await new SignJWT(payload)
+			.setProtectedHeader({ alg: "HS256" })
+			.setIssuedAt()
+			.setExpirationTime("15m")
+			.sign(encodedKey);
 
-	return session
+		return session;
+	} catch (err: any) {
+		console.error("Error creating session:", err);
+		throw err;
+	}
 }
 
 export async function decrypt(session: string | undefined = "") {
@@ -32,7 +31,8 @@ export async function decrypt(session: string | undefined = "") {
 			algorithms: ["HS256"],
 		});
 		return payload;
-	} catch (error) {
-		console.log("Failed to verify session");
+	} catch (error: any) {
+		console.error("Failed to verify session:", error);
+		return null;
 	}
 }

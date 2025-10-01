@@ -12,24 +12,42 @@ export async function POST(
 	request: NextRequest,
 	{ params }: { params: Promise<{ id: string }> }
 ) {
-	const data = await request.json();
-	const { id } = await params;
+	try {
+		const data = await request.json();
+		const { id } = await params;
 
-	const cook = (await cookies()).get("access_token");
-	const cookieInfo = await decrypt(cook?.value);
-	const hasPermission = await checkUserOwnsProject(cookieInfo?.email, id);
-	// console.log('has permission', hasPermission)
+		const cook = (await cookies()).get("access_token");
+		const cookieInfo = await decrypt(cook?.value);
+		const hasPermission = await checkUserOwnsProject(cookieInfo?.email, id);
 
-	if (hasPermission) {
+		if (!hasPermission) {
+			return NextResponse.json(
+				{ status: "error", numProg: 100, data: [] },
+				{ status: 403 }
+			);
+		}
 
-		const urls = await Promise.all(data[0].scenes.map(async (scene: any) => {
-			console.log(scene.description)
-			console.log(' ')
-		    const imageUrl = await generateImage(scene.description) as string
-		    const downloadableUrl = await insertImageIntoDatabase (imageUrl)
-		    return downloadableUrl
-
-		}))
+		const urls = await Promise.all(
+			data[0].scenes.map(async (scene: any) => {
+				try {
+					console.log(scene.description);
+					console.log(" ");
+					const imageUrl = (await generateImage(
+						scene.description
+					)) as string;
+					const downloadableUrl = await insertImageIntoDatabase(
+						imageUrl
+					);
+					return downloadableUrl;
+				} catch (innerErr: any) {
+					console.error(
+						"Error generating image for scene:",
+						innerErr
+					);
+					return "";
+				}
+			})
+		);
 
 		await addImageLinksToUserProject(urls, id);
 
@@ -38,7 +56,11 @@ export async function POST(
 			numProg: 100,
 			data: urls,
 		});
-	} else {
-		return NextResponse.json({ status: "error", numProg: 100, data: [] });
+	} catch (err: any) {
+		console.error("Error in /api/generatecardimages POST:", err);
+		return NextResponse.json(
+			{ message: "error", error: err?.message ?? String(err) },
+			{ status: 500 }
+		);
 	}
 }

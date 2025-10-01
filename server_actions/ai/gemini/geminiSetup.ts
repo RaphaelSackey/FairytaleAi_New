@@ -1,7 +1,13 @@
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 
 const apiKey = process.env.GEMINI_API_KEY as string;
-const genAI = new GoogleGenerativeAI(apiKey);
+let genAI: any;
+try {
+	genAI = new GoogleGenerativeAI(apiKey);
+} catch (err: any) {
+	console.error("Error initializing GoogleGenerativeAI:", err);
+	throw err;
+}
 
 const schema = {
 	description:
@@ -42,7 +48,7 @@ const schema = {
 };
 
 const geminiModel = genAI.getGenerativeModel({
-	model: "gemini-1.5-pro",
+	model: "gemini-2.5-pro",
 	generationConfig: {
 		responseMimeType: "application/json",
 		responseSchema: schema,
